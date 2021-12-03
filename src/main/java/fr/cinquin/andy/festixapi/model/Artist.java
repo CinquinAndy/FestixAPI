@@ -1,6 +1,5 @@
 package fr.cinquin.andy.festixapi.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -30,5 +29,6 @@ public class Artist {
     @Column(name = "PHOTO_URL", nullable = false)
     private String photoUrl;
     @ManyToMany(mappedBy = "artists")
+    @ToString.Exclude
     private Set<Event> events;
 }

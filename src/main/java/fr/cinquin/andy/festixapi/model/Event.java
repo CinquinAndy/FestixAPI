@@ -26,7 +26,7 @@ public class Event {
     @Column(name = "DATETIME")
     private LocalDateTime dateTime;
     @ManyToOne
-    @Column(name = "FESTIVAL_ID")
+    @JoinColumn(name = "FESTIVAL_ID")
     private Festival festival;
     @ManyToMany
     @JoinTable(name = "EVENT_ARTIST", joinColumns = @JoinColumn(name = "EVENT_ID"), inverseJoinColumns = @JoinColumn(name = "ARTIST_ID"))
