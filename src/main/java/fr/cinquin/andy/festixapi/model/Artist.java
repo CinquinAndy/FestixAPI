@@ -6,25 +6,19 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
 //@Table(name = "ARTIST")
-//@Entity
+@Entity
 @Getter
 @Setter
 @ToString
 public class Artist {
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "ID", updatable = false, nullable = false)
     private UUID id;
     @Column(name = "ARTIST_NAME", nullable = false)
@@ -35,6 +29,6 @@ public class Artist {
     private String musicStyle;
     @Column(name = "PHOTO_URL", nullable = false)
     private String photoUrl;
-    @Column(name = "EVENTS")
+    @ManyToMany(mappedBy = "artists")
     private Set<Event> events;
 }
