@@ -1,8 +1,7 @@
 package fr.cinquin.andy.festixapi.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -15,6 +14,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Event {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -26,10 +27,12 @@ public class Event {
     @Column(name = "DATETIME")
     private LocalDateTime dateTime;
     @ManyToOne
-    @JoinColumn(name = "FESTIVAL_ID")
+    @JoinColumn(name = "FESTIVAL_ID",referencedColumnName = "ID")
+    @JsonBackReference
     private Festival festival;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "EVENT_ARTIST", joinColumns = @JoinColumn(name = "EVENT_ID"), inverseJoinColumns = @JoinColumn(name = "ARTIST_ID"))
+    @JsonBackReference
     @ToString.Exclude
     private Set<Artist> artists;
 }

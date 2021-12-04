@@ -1,0 +1,1 @@
+-- Le fichier doit être présent pour initialiser Flyway

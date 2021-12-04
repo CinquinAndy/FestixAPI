@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    password: xhesHLa7qKAK
+    url: jdbc:postgresql://localhost:5432/festix
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+  flyway:
+    enabled: true
+    out-of-order: true
+    baseline-on-migrate: true
+    user: postgres
+    password: xhesHLa7qKAK
+    url: jdbc:postgresql://localhost:5432/festix

@@ -1,8 +1,8 @@
 package fr.cinquin.andy.festixapi.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,6 +14,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Artist {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -28,7 +30,8 @@ public class Artist {
     private String musicStyle;
     @Column(name = "PHOTO_URL", nullable = false)
     private String photoUrl;
-    @ManyToMany(mappedBy = "artists")
+    @ManyToMany(mappedBy = "artists", fetch=FetchType.LAZY)
+    @JsonManagedReference
     @ToString.Exclude
     private Set<Event> events;
 }

@@ -1,7 +1,7 @@
 package fr.cinquin.andy.festixapi.service.implementation;
 
 import fr.cinquin.andy.festixapi.model.Festival;
-import fr.cinquin.andy.festixapi.repository.FestivalRepository;
+import fr.cinquin.andy.festixapi.dao.repository.FestivalRepository;
 import fr.cinquin.andy.festixapi.service.FestivalService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

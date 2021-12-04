@@ -1,4 +1,4 @@
-package fr.cinquin.andy.festixapi.repository;
+package fr.cinquin.andy.festixapi.dao.repository;
 
 import fr.cinquin.andy.festixapi.model.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,7 +1,7 @@
 package fr.cinquin.andy.festixapi.service.implementation;
 
 import fr.cinquin.andy.festixapi.model.Admin;
-import fr.cinquin.andy.festixapi.repository.AdminRepository;
+import fr.cinquin.andy.festixapi.dao.repository.AdminRepository;
 import fr.cinquin.andy.festixapi.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

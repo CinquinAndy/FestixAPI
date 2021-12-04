@@ -1,8 +1,7 @@
 package fr.cinquin.andy.festixapi.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -15,6 +14,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Festival {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -31,7 +32,8 @@ public class Festival {
     private LocalDate dateStart;
     @Column(name = "DATE_END")
     private LocalDate dateEnd;
-    @OneToMany(mappedBy = "festival")
+    @OneToMany(mappedBy = "festival", orphanRemoval = true)
+    @JsonManagedReference
     @ToString.Exclude
     private Set<Event> events;
 }

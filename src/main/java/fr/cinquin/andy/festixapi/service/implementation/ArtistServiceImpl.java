@@ -1,7 +1,7 @@
 package fr.cinquin.andy.festixapi.service.implementation;
 
 import fr.cinquin.andy.festixapi.model.Artist;
-import fr.cinquin.andy.festixapi.repository.ArtistRepository;
+import fr.cinquin.andy.festixapi.dao.repository.ArtistRepository;
 import fr.cinquin.andy.festixapi.service.ArtistService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
