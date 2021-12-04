@@ -33,7 +33,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Admin get(UUID uuid) {
         log.info("get Admin... {}", uuid);
-        return adminRepository.findById(uuid).isPresent() ? adminRepository.findById(uuid).get() : null;
+        return adminRepository.getById(uuid);
     }
 
     @Override

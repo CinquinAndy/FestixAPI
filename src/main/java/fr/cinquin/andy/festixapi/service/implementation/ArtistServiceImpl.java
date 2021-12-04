@@ -34,7 +34,7 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     public Artist get(UUID uuid) {
         log.info("get Artist... {}", uuid);
-        return artistRepository.findById(uuid).isPresent() ? artistRepository.findById(uuid).get() : null;
+        return artistRepository.getById(uuid);
     }
 
     @Override

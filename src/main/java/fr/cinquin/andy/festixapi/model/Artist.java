@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
+//@Table(name = "ARTIST")
 @Entity
 @Getter
 @Setter
