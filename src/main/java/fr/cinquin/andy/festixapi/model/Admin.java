@@ -21,6 +21,8 @@ public class Admin {
     private UUID id;
     private String firstname;
     private String lastname;
+    private String password;
+    @Column(unique = true)
     private String email;
     private boolean isValidated;
 }

@@ -19,6 +19,9 @@ public class AdminDto {
     private String lastname;
     @NotNull
     @NotEmpty
+    private String password;
+    @NotNull
+    @NotEmpty
     private String email;
     private boolean isValidated;
 }

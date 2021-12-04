@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.UUID;
 
 public interface AdminService {
-    Admin create(Admin admin);
     Collection<Admin> list(int limit);
     Admin get(UUID uuid);
     Admin update(Admin admin);

@@ -18,11 +18,6 @@ import java.util.UUID;
 @Slf4j
 public class AdminServiceImpl implements AdminService {
     private final AdminRepository adminRepository;
-    @Override
-    public Admin create(Admin admin) {
-        log.info("Create admin... {}", admin.getEmail());
-        return adminRepository.save(admin);
-    }
 
     @Override
     public Collection<Admin> list(int limit) {

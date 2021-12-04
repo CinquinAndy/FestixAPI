@@ -6,7 +6,6 @@ import fr.cinquin.andy.festixapi.service.implementation.AdminServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -68,19 +67,6 @@ public class AdminController {
                         .message("Admin saved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
-                        .build()
-        );
-    }
-
-    @PostMapping("/create/")
-    public ResponseEntity<Response> createAdmin(@RequestBody @Valid Admin admin){
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(Map.of("admin",adminService.create(admin)))
-                        .message("Admin created")
-                        .status(HttpStatus.CREATED)
-                        .statusCode(HttpStatus.CREATED.value())
                         .build()
         );
     }
