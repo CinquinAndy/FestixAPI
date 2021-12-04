@@ -1,29 +1,55 @@
-package fr.cinquin.andy.festixapi.config;
+package fr.cinquin.andy.festixapi.security;
 
+import fr.cinquin.andy.festixapi.security.jwt.AuthEntryPointJwt;
+import fr.cinquin.andy.festixapi.security.jwt.AuthTokenFilter;
+import fr.cinquin.andy.festixapi.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
-import org.springframework.core.env.Profiles;
-import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-//    @Autowired
-//    private Environment env;
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
 
-    public SecurityConfiguration(){
+    @Autowired
+    private AuthEntryPointJwt unauthorizedHandler;
+
+    @Bean
+    public AuthTokenFilter authenticationJwtTokenFilter() {
+        return new AuthTokenFilter();
+    }
+
+    @Override
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+    @Bean
+    public AuthenticationManager customAuthenticationManager() throws Exception {
+        return authenticationManager();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
+    public WebSecurityConfiguration(){
         super();
         SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
     }
@@ -43,7 +69,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/event/get/*/","/event/list/").permitAll()
 //                Toutes les autres requêtes sont privées & nécessite une authentification
 //                Admin
-                .antMatchers("/admin/get/*/","/admin/list/").permitAll()
+//                .antMatchers("/admin/get/*/","/admin/list/").permitAll()
                 .anyRequest().authenticated();
 
         http.csrf()
@@ -56,11 +82,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
     }
-
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        if( this.env.acceptsProfiles(Profiles.of("local"))){
-//            web.ignoring().antMatchers("/v3/api-docs/**","/swagger-ui.html","/swagger-ui/**");
-//        }
-//    }
 }

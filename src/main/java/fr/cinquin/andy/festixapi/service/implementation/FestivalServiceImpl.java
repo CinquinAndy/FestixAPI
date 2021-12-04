@@ -34,7 +34,7 @@ public class FestivalServiceImpl implements FestivalService {
     @Override
     public Festival get(UUID uuid) {
         log.info("get Festival... {}", uuid);
-        return festivalRepository.getById(uuid);
+        return festivalRepository.findById(uuid).isPresent() ? festivalRepository.findById(uuid).get() : null;
     }
 
     @Override

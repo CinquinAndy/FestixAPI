@@ -34,7 +34,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event get(UUID uuid) {
         log.info("get Event... {}", uuid);
-        return eventRepository.getById(uuid);
+        return eventRepository.findById(uuid).isPresent() ? eventRepository.findById(uuid).get() : null;
     }
 
     @Override

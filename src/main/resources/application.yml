@@ -17,3 +17,9 @@ spring:
     user: postgres
     password: xhesHLa7qKAK
     url: jdbc:postgresql://localhost:5432/festix
+fr:
+  cinquin:
+    andy:
+      festixapi:
+        jwtsecret: B1l-s5EI+*p/.Wp{RoSD;jI+0zyfuB/!cMXZ0awx~_tAxsL8p)*ZFCK?UQ&Z?p}#
+        jwtexpirationms: 86400

@@ -6,7 +6,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.UUID;
 
-//@Table(name = "ADMIN")
 @Entity
 @Getter
 @Setter
@@ -22,5 +21,6 @@ public class Admin {
     private String firstname;
     private String lastname;
     private String email;
+    private String password;
     private boolean isValidated;
 }
