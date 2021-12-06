@@ -1,5 +1,6 @@
 package fr.cinquin.andy.festixapi.controller;
 
+import fr.cinquin.andy.festixapi.dto.UserDto;
 import fr.cinquin.andy.festixapi.model.Users;
 import fr.cinquin.andy.festixapi.model.Response;
 import fr.cinquin.andy.festixapi.service.implementation.UserServiceImpl;
@@ -18,14 +19,14 @@ import static java.time.LocalDateTime.now;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
-    private final UserServiceImpl adminService;
+    private final UserServiceImpl userService;
     @GetMapping("/list/")
-    public ResponseEntity<Response> getAdmins(){
+    public ResponseEntity<Response> getUsers(){
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("admins",adminService.list(30)))
-                        .message("Admins retrieved")
+                        .data(Map.of("users", userService.list(100)))
+                        .message("Users retrieved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
                         .build()
@@ -33,11 +34,11 @@ public class UserController {
     }
 
     @GetMapping("/get/{uuid}/")
-    public ResponseEntity<Response> getAdmin(@PathVariable("uuid") String uuid){
+    public ResponseEntity<Response> getUser(@PathVariable("uuid") String uuid){
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("admin",adminService.get(UUID.fromString(uuid))))
+                        .data(Map.of("user", userService.get(UUID.fromString(uuid))))
                         .message("Users retrieved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
@@ -46,11 +47,11 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{uuid}/")
-    public ResponseEntity<Response> deleteAdmin(@PathVariable("uuid") String uuid){
+    public ResponseEntity<Response> deleteUser(@PathVariable("uuid") String uuid){
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("deleted",adminService.delete(UUID.fromString(uuid))))
+                        .data(Map.of("deleted", userService.delete(UUID.fromString(uuid))))
                         .message("Users deleted")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
@@ -59,11 +60,11 @@ public class UserController {
     }
 
     @PostMapping("/save/")
-    public ResponseEntity<Response> saveAdmin(@RequestBody @Valid Users users){
+    public ResponseEntity<Response> saveUser(@RequestBody @Valid UserDto userDto){
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("users",adminService.update(users)))
+                        .data(Map.of("users", userService.update(userDto)))
                         .message("Users saved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())

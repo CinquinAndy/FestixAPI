@@ -1,28 +1,34 @@
 package fr.cinquin.andy.festixapi.service.implementation;
 
+import fr.cinquin.andy.festixapi.dto.UserDto;
+import fr.cinquin.andy.festixapi.mapper.UserMapper;
+import fr.cinquin.andy.festixapi.model.UserToReturn;
 import fr.cinquin.andy.festixapi.model.Users;
 import fr.cinquin.andy.festixapi.dao.repository.UserRepository;
 import fr.cinquin.andy.festixapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
-@RequiredArgsConstructor
-@Service
 @Transactional
+@Service
 @Slf4j
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository adminRepository;
 
+    @Autowired
+    private UserMapper mapper;
+
     @Override
-    public Collection<Users> list(int limit) {
+    public List<UserToReturn> list(int limit) {
         log.info("List admin... limit : {}", limit);
-        return adminRepository.findAll(PageRequest.of(0,limit)).toList();
+        return adminRepository.findAllBy();
     }
 
     @Override
@@ -32,9 +38,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Users update(Users users) {
-        log.info("Update users... {}", users.getEmail());
-        return adminRepository.save(users);
+    public Users update(UserDto usersDto) {
+        Users user = mapper.map(usersDto);
+        log.info("Update users... {}", user.getEmail());
+        return adminRepository.save(user);
+        return null;
     }
 
     @Override

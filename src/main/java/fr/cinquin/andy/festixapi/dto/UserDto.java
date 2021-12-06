@@ -2,11 +2,15 @@ package fr.cinquin.andy.festixapi.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.mapstruct.Mapping;
+import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 import java.util.UUID;
 
+@Component
 @Data
 @AllArgsConstructor
 public class UserDto {
@@ -27,7 +31,5 @@ public class UserDto {
     @NotEmpty
     private String email;
     private boolean enabled;
-    @NotNull
-    @NotEmpty
-    private String authority;
+    private Set<String> authorities;
 }

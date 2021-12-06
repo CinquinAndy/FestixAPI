@@ -42,7 +42,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList("http://localhost:8080"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:8080","*"));
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -56,13 +56,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .csrf()
+                .ignoringAntMatchers("/artist/create/")
                 .ignoringAntMatchers("/login")
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
                 .authorizeRequests()
-                .antMatchers("/artist/create/","/artist/delete/**","/artist/save/").hasAuthority("ADMIN")
-                .antMatchers("/event/create/","/event/delete/**","/event/save/").hasAuthority("ADMIN")
-                .antMatchers("/festival/create/","/festival/delete/**","/festival/save/").hasAuthority("ADMIN")
+//                .antMatchers("/artist/create/","/artist/delete/**","/artist/save/").permitAll()
+                .antMatchers("/event/create/","/event/delete/**","/event/save/").hasAnyAuthority("ADMIN")
+                .antMatchers("/festival/create/","/festival/delete/**","/festival/save/").hasAnyAuthority("ADMIN")
 //                .antMatchers("/secured/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/**").permitAll()
                 .and()

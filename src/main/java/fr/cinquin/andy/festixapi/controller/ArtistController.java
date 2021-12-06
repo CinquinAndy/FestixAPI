@@ -1,9 +1,11 @@
 package fr.cinquin.andy.festixapi.controller;
 
-import fr.cinquin.andy.festixapi.model.Artist;
+import fr.cinquin.andy.festixapi.dto.ArtistDto;
+import fr.cinquin.andy.festixapi.mapper.ArtistMapper;
 import fr.cinquin.andy.festixapi.model.Response;
 import fr.cinquin.andy.festixapi.service.implementation.ArtistServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,8 @@ import static java.time.LocalDateTime.now;
 @RequiredArgsConstructor
 public class ArtistController {
     private final ArtistServiceImpl artistService;
+
+
     @GetMapping("/list/")
     public ResponseEntity<Response> getArtists(){
         return ResponseEntity.ok(
@@ -58,12 +62,13 @@ public class ArtistController {
         );
     }
 
+    @CrossOrigin("*")
     @PostMapping("/save/")
-    public ResponseEntity<Response> saveArtist(@RequestBody @Valid Artist artist){
+    public ResponseEntity<Response> saveArtist(@RequestBody @Valid ArtistDto artistDto){
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("artist",artistService.update(artist)))
+                        .data(Map.of("artist",artistService.update(artistDto)))
                         .message("Artist saved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
@@ -71,16 +76,23 @@ public class ArtistController {
         );
     }
 
+    @CrossOrigin("*")
     @PostMapping("/create/")
-    public ResponseEntity<Response> createArtist(@RequestBody @Valid Artist artist){
+    public ResponseEntity<Response> createArtist(@RequestBody ArtistDto artistDto){
+        System.out.println(artistDto);
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("artist",artistService.create(artist)))
+                        .data(Map.of("artist",artistService.create(artistDto)))
                         .message("Artist created")
                         .status(HttpStatus.CREATED)
                         .statusCode(HttpStatus.CREATED.value())
                         .build()
         );
+    }
+
+    @PostMapping("/test/")
+    public String createArtist(@RequestBody String test){
+        return test;
     }
 }
