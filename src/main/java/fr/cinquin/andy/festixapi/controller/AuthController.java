@@ -1,13 +1,9 @@
 package fr.cinquin.andy.festixapi.controller;
 
-import fr.cinquin.andy.festixapi.dto.AdminDto;
-import fr.cinquin.andy.festixapi.mappers.AdminMapper;
-import fr.cinquin.andy.festixapi.model.Admin;
+import fr.cinquin.andy.festixapi.dto.UserDto;
 import fr.cinquin.andy.festixapi.model.Response;
-import fr.cinquin.andy.festixapi.service.AuthService;
 import fr.cinquin.andy.festixapi.service.implementation.AuthServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,12 +23,12 @@ public class AuthController {
     private final AuthServiceImpl authService;
 
     @PostMapping("/register/")
-    public ResponseEntity<Response> saveAdmin(@RequestBody @Valid AdminDto adminDto){
+    public ResponseEntity<Response> saveAdmin(@RequestBody @Valid UserDto userDto){
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("user",authService.register(adminDto)))
-                        .message("User created")
+                        .data(Map.of("user",authService.register(userDto)))
+                        .message("Users created")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
                         .build()
@@ -41,12 +37,12 @@ public class AuthController {
 
 //     todo login
 //    @PostMapping("/login/")
-//    public ResponseEntity<Response> saveAdmin(@RequestBody @Valid AdminDto adminDto){
+//    public ResponseEntity<Response> saveAdmin(@RequestBody @Valid UserDto adminDto){
 //        return ResponseEntity.ok(
 //                Response.builder()
 //                        .timeStamp(now())
 //                        .data(Map.of("user",authService.register(adminDto)))
-//                        .message("User created")
+//                        .message("Users created")
 //                        .status(HttpStatus.OK)
 //                        .statusCode(HttpStatus.OK.value())
 //                        .build()

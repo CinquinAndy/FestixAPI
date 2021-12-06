@@ -9,8 +9,11 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-public class AdminDto {
+public class UserDto {
     private UUID id;
+    @NotNull
+    @NotEmpty
+    private String username;
     @NotNull
     @NotEmpty
     private String firstname;
@@ -23,5 +26,8 @@ public class AdminDto {
     @NotNull
     @NotEmpty
     private String email;
-    private boolean isValidated;
+    private boolean enabled;
+    @NotNull
+    @NotEmpty
+    private String authority;
 }

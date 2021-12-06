@@ -1,8 +1,8 @@
 package fr.cinquin.andy.festixapi.controller;
 
-import fr.cinquin.andy.festixapi.model.Admin;
+import fr.cinquin.andy.festixapi.model.Users;
 import fr.cinquin.andy.festixapi.model.Response;
-import fr.cinquin.andy.festixapi.service.implementation.AdminServiceImpl;
+import fr.cinquin.andy.festixapi.service.implementation.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +15,10 @@ import java.util.UUID;
 import static java.time.LocalDateTime.now;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/user")
 @RequiredArgsConstructor
-public class AdminController {
-    private final AdminServiceImpl adminService;
+public class UserController {
+    private final UserServiceImpl adminService;
     @GetMapping("/list/")
     public ResponseEntity<Response> getAdmins(){
         return ResponseEntity.ok(
@@ -38,7 +38,7 @@ public class AdminController {
                 Response.builder()
                         .timeStamp(now())
                         .data(Map.of("admin",adminService.get(UUID.fromString(uuid))))
-                        .message("Admin retrieved")
+                        .message("Users retrieved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
                         .build()
@@ -51,7 +51,7 @@ public class AdminController {
                 Response.builder()
                         .timeStamp(now())
                         .data(Map.of("deleted",adminService.delete(UUID.fromString(uuid))))
-                        .message("Admin deleted")
+                        .message("Users deleted")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
                         .build()
@@ -59,12 +59,12 @@ public class AdminController {
     }
 
     @PostMapping("/save/")
-    public ResponseEntity<Response> saveAdmin(@RequestBody @Valid Admin admin){
+    public ResponseEntity<Response> saveAdmin(@RequestBody @Valid Users users){
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("admin",adminService.update(admin)))
-                        .message("Admin saved")
+                        .data(Map.of("users",adminService.update(users)))
+                        .message("Users saved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
                         .build()

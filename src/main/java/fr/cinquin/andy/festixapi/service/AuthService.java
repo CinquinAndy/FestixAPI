@@ -1,8 +1,8 @@
 package fr.cinquin.andy.festixapi.service;
 
-import fr.cinquin.andy.festixapi.dto.AdminDto;
-import fr.cinquin.andy.festixapi.model.Admin;
+import fr.cinquin.andy.festixapi.dto.UserDto;
+import fr.cinquin.andy.festixapi.model.Users;
 
 public interface AuthService {
-    Admin register(AdminDto adminDto);
+    Users register(UserDto userDto);
 }

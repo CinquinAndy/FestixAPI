@@ -1,8 +1,8 @@
 package fr.cinquin.andy.festixapi.service.implementation;
 
-import fr.cinquin.andy.festixapi.model.Admin;
-import fr.cinquin.andy.festixapi.dao.repository.AdminRepository;
-import fr.cinquin.andy.festixapi.service.AdminService;
+import fr.cinquin.andy.festixapi.model.Users;
+import fr.cinquin.andy.festixapi.dao.repository.UserRepository;
+import fr.cinquin.andy.festixapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -16,30 +16,30 @@ import java.util.UUID;
 @Service
 @Transactional
 @Slf4j
-public class AdminServiceImpl implements AdminService {
-    private final AdminRepository adminRepository;
+public class UserServiceImpl implements UserService {
+    private final UserRepository adminRepository;
 
     @Override
-    public Collection<Admin> list(int limit) {
+    public Collection<Users> list(int limit) {
         log.info("List admin... limit : {}", limit);
         return adminRepository.findAll(PageRequest.of(0,limit)).toList();
     }
 
     @Override
-    public Admin get(UUID uuid) {
-        log.info("get Admin... {}", uuid);
+    public Users get(UUID uuid) {
+        log.info("get Users... {}", uuid);
         return adminRepository.getById(uuid);
     }
 
     @Override
-    public Admin update(Admin admin) {
-        log.info("Update admin... {}", admin.getEmail());
-        return adminRepository.save(admin);
+    public Users update(Users users) {
+        log.info("Update users... {}", users.getEmail());
+        return adminRepository.save(users);
     }
 
     @Override
     public Boolean delete(UUID uuid) {
-        log.info("delete Admin... {}", uuid);
+        log.info("delete Users... {}", uuid);
         adminRepository.deleteById(uuid);
         return Boolean.TRUE;
     }
