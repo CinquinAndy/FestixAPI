@@ -61,21 +61,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/onlyforadmin/**").hasAuthority("ADMIN")
-//                .antMatchers("/onlyforadmin/**").hasAnyRole("ADMIN")
                 .antMatchers("/secured/**").hasAnyAuthority("USER", "ADMIN")
-//                .antMatchers("/secured/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/**").permitAll()
                 .and()
                 .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
-
-//    @Override
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .inMemoryAuthentication()
-//                .withUser("admin").password("{noop}password").authorities("USER", "ADMIN")
-//                .and()
-//                .withUser("user").password("{noop}password").authorities("USER");
-//    }
 }
