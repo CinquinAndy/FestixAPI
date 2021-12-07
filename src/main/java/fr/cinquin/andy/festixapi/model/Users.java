@@ -3,15 +3,17 @@ package fr.cinquin.andy.festixapi.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
+//implements UserDetails
 @Entity
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Users {
@@ -33,4 +35,45 @@ public class Users {
     @JsonBackReference
     @ToString.Exclude
     private Set<Role> roles;
+//
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        List<String> liste = new ArrayList<>();
+//        for (Role r:roles) {
+//            liste.add(r.getRole());
+//        }
+//        return AuthorityUtils.commaSeparatedStringToAuthorityList(
+//                String.join(",", liste)
+//        );
+//    }
+//
+//    @Override
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    @Override
+//    public String getUsername() {
+//        return username;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isEnabled() {
+//        return enabled;
+//    }
 }

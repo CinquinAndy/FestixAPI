@@ -17,7 +17,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@ComponentScan
 @SpringBootApplication
 public class FestixApiApplication {
     @Autowired
@@ -30,12 +29,15 @@ public class FestixApiApplication {
     @Bean
     CommandLineRunner run(UserRepository userRepository, FestivalRepository festivalRepository, EventRepository eventRepository, ArtistRepository artistRepository, AuthorityRepository authorityRepository) {
         return args -> {
-            Role role = new Role(null, "ADMIN", null);
-            Set<Role> roles = new HashSet<>(List.of(role));
+            Role role = new Role(null, "ROLE_USER", null);
+            Role role2 = new Role(null, "ROLE_ADMIN", null);
+            Set<Role> roles = new HashSet<>(List.of(role, role2));
             authorityRepository.save(role);
+            authorityRepository.save(role2);
             userRepository.save(new Users(null, "andy", "Andy", "Cinquin", passwordEncoder.encode("password"), "cinquin.andy@gmail.com", true, new HashSet<>(List.of(role))));
-            userRepository.save(new Users(null, "andy2", "Andy2", "Cinquin2", passwordEncoder.encode("password2"), "cinquin.andy2@gmail.com", false, new HashSet<>(List.of(role))));
-            userRepository.save(new Users(null, "andy3", "Andy3", "Cinquin3", passwordEncoder.encode("password3"), "cinquin.andy3@gmail.com", false, new HashSet<>(List.of(role))));
+            userRepository.save(new Users(null, "test", "test", "test", passwordEncoder.encode("test"), "test.test@test.com", true, new HashSet<>(List.of(role))));
+            userRepository.save(new Users(null, "andy2", "Andy2", "Cinquin2", passwordEncoder.encode("password2"), "cinquin.andy2@gmail.com", true, new HashSet<>(List.of(role2))));
+            userRepository.save(new Users(null, "andy3", "Andy3", "Cinquin3", passwordEncoder.encode("password3"), "cinquin.andy3@gmail.com", true, new HashSet<>(List.of(role, role2))));
 
             Festival festival = new Festival(null, "Premier festival", "Description", "photoUrl", LocalDate.now(), LocalDate.now(), null);
             Festival festival2 = new Festival(null, "Premier festival2", "Description2", "photoUrl2", LocalDate.now(), LocalDate.now(), null);
@@ -59,15 +61,15 @@ public class FestixApiApplication {
             artistRepository.save(artist4);
             artistRepository.save(artist5);
 
-            Set<Artist> artists = new HashSet<>(Arrays.asList(artist1,artist2,artist3));
+            Set<Artist> artists = new HashSet<>(Arrays.asList(artist1, artist2, artist3));
             Event event = new Event(null, "Premier Event", LocalDateTime.now(), festival, artists);
             Event event6 = new Event(null, "Deuxième Event", LocalDateTime.now().plusHours(1), festival, artists);
             Event event7 = new Event(null, "Troisième Event", LocalDateTime.now().plusHours(2), festival, artists);
-            Set<Artist> artists2 = new HashSet<>(Arrays.asList(artist2,artist3));
+            Set<Artist> artists2 = new HashSet<>(Arrays.asList(artist2, artist3));
             Event event2 = new Event(null, "Premier Event", LocalDateTime.now(), festival2, artists2);
-            Set<Artist> artists3 = new HashSet<>(Arrays.asList(artist3,artist4));
+            Set<Artist> artists3 = new HashSet<>(Arrays.asList(artist3, artist4));
             Event event3 = new Event(null, "Premier Event", LocalDateTime.now(), festival3, artists3);
-            Set<Artist> artists4 = new HashSet<>(Arrays.asList(artist4,artist5));
+            Set<Artist> artists4 = new HashSet<>(Arrays.asList(artist4, artist5));
             Event event4 = new Event(null, "Premier Event", LocalDateTime.now(), festival4, artists4);
             eventRepository.save(event);
             eventRepository.save(event2);

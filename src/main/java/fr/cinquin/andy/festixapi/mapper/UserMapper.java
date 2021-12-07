@@ -7,8 +7,8 @@ import org.mapstruct.Mapping;
 
 @Mapper
 public interface UserMapper {
-    @Mapping(target = "authorities", ignore = true)
+    @Mapping(target = "roles", ignore = true)
     UserDto map(Users users);
-    @Mapping(target = "authorities", ignore = true)
+    @Mapping(target = "roles", ignore = true)
     Users map(UserDto userDto);
 }

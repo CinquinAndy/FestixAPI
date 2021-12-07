@@ -15,6 +15,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Role {
+//    public static final String ADMIN = "ADMIN";
+//    public static final String USERS = "USERS";
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -22,7 +24,7 @@ public class Role {
     private UUID id;
     @Column(nullable = false)
     private String role;
-    @ManyToMany(mappedBy = "roles", fetch= FetchType.LAZY)
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     @JsonManagedReference
     @ToString.Exclude
     private Set<Users> users;

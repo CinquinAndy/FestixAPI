@@ -4,7 +4,9 @@ import fr.cinquin.andy.festixapi.security.JWTAuthenticationFilter;
 import fr.cinquin.andy.festixapi.security.JWTLoginFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -20,7 +23,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import javax.sql.DataSource;
 import java.util.Arrays;
 
+@Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
@@ -61,13 +66,22 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
                 .authorizeRequests()
-                .antMatchers("/artist/create/","/artist/delete/**","/artist/save/").hasRole("ADMIN")
-                .antMatchers("/event/create/","/event/delete/**","/event/save/").hasAnyAuthority("ADMIN", "USER")
-                .antMatchers("/festival/create/","/festival/delete/**","/festival/save/").hasAnyAuthority("ADMIN")
+                .antMatchers("/artist/create/","/artist/delete/**","/artist/save/").authenticated()
+                .antMatchers("/event/create/","/event/delete/**","/event/save/").authenticated()
+                .antMatchers("/festival/create/","/festival/delete/**","/festival/save/").authenticated()
 //                .antMatchers("/secured/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/**").permitAll()
                 .and()
                 .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        http.logout()
+                .logoutUrl("/logout")
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .deleteCookies("COOKIE-BEARER")
+                .deleteCookies("XSRF-TOKEN")
+                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
     }
 }
