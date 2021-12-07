@@ -34,8 +34,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("select username, password, enabled from users where username = ?")
-                .authoritiesByUsernameQuery("select u.username, auth.authority from users u join user_authority ua on u.id=ua.user_id join authority auth on ua.authority_id=auth.id where u.username = ?");
-//                .authoritiesByUsernameQuery("select u.username, ur.roles from usr u inner join user_roles ur on u.id = ur.user_id where u.username = ?");
+                .authoritiesByUsernameQuery("select u.username, r.role from users u inner join user_role ur on u.id=ur.user_id inner join role r on ur.role_id=r.id where u.username = ?");
     }
 
     @Bean
@@ -56,13 +55,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .csrf()
-                .ignoringAntMatchers("/artist/create/")
                 .ignoringAntMatchers("/login")
+//                .ignoringAntMatchers("/artist/create/","/artist/delete/**","/artist/save/")
+//                .ignoringAntMatchers("/artist/create/","/artist/delete/**","/artist/save/")
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
                 .authorizeRequests()
-//                .antMatchers("/artist/create/","/artist/delete/**","/artist/save/").permitAll()
-                .antMatchers("/event/create/","/event/delete/**","/event/save/").hasAnyAuthority("ADMIN")
+                .antMatchers("/artist/create/","/artist/delete/**","/artist/save/").hasRole("ADMIN")
+                .antMatchers("/event/create/","/event/delete/**","/event/save/").hasAnyAuthority("ADMIN", "USER")
                 .antMatchers("/festival/create/","/festival/delete/**","/festival/save/").hasAnyAuthority("ADMIN")
 //                .antMatchers("/secured/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/**").permitAll()

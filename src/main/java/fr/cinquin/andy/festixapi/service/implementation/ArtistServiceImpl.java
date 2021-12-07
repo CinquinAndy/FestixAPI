@@ -22,7 +22,6 @@ import java.util.UUID;
 public class ArtistServiceImpl implements ArtistService {
     private final ArtistRepository artistRepository;
 
-//    private UserMapper mapper = Mappers.getMapper(UserMapper.class);
     private ArtistMapper mapper = Mappers.getMapper(ArtistMapper.class);
 
     @Override

@@ -1,6 +1,5 @@
 package fr.cinquin.andy.festixapi;
 
-import fr.cinquin.andy.festixapi.*;
 import fr.cinquin.andy.festixapi.dao.repository.*;
 import fr.cinquin.andy.festixapi.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +30,12 @@ public class FestixApiApplication {
     @Bean
     CommandLineRunner run(UserRepository userRepository, FestivalRepository festivalRepository, EventRepository eventRepository, ArtistRepository artistRepository, AuthorityRepository authorityRepository) {
         return args -> {
-            Authority auth = new Authority(null, "ADMIN", null);
-            Set<Authority> auths = new HashSet<>(List.of(auth));
-            authorityRepository.save(auth);
-            userRepository.save(new Users(null, "andy", "Andy", "Cinquin", passwordEncoder.encode("password"), "cinquin.andy@gmail.com", true, new HashSet<>(List.of(auth))));
-            userRepository.save(new Users(null, "andy2", "Andy2", "Cinquin2", passwordEncoder.encode("password2"), "cinquin.andy2@gmail.com", false, new HashSet<>(List.of(auth))));
-            userRepository.save(new Users(null, "andy3", "Andy3", "Cinquin3", passwordEncoder.encode("password3"), "cinquin.andy3@gmail.com", false, new HashSet<>(List.of(auth))));
+            Role role = new Role(null, "ADMIN", null);
+            Set<Role> roles = new HashSet<>(List.of(role));
+            authorityRepository.save(role);
+            userRepository.save(new Users(null, "andy", "Andy", "Cinquin", passwordEncoder.encode("password"), "cinquin.andy@gmail.com", true, new HashSet<>(List.of(role))));
+            userRepository.save(new Users(null, "andy2", "Andy2", "Cinquin2", passwordEncoder.encode("password2"), "cinquin.andy2@gmail.com", false, new HashSet<>(List.of(role))));
+            userRepository.save(new Users(null, "andy3", "Andy3", "Cinquin3", passwordEncoder.encode("password3"), "cinquin.andy3@gmail.com", false, new HashSet<>(List.of(role))));
 
             Festival festival = new Festival(null, "Premier festival", "Description", "photoUrl", LocalDate.now(), LocalDate.now(), null);
             Festival festival2 = new Festival(null, "Premier festival2", "Description2", "photoUrl2", LocalDate.now(), LocalDate.now(), null);

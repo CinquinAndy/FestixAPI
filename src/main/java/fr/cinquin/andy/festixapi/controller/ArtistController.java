@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.Map;
 import java.util.UUID;
@@ -23,11 +24,11 @@ public class ArtistController {
     private final ArtistServiceImpl artistService;
 
     @GetMapping("/list/")
-    public ResponseEntity<Response> getArtists(){
+    public ResponseEntity<Response> getArtists() {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("artists",artistService.list(30)))
+                        .data(Map.of("artists", artistService.list(30)))
                         .message("Artists retrieved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
@@ -36,11 +37,11 @@ public class ArtistController {
     }
 
     @GetMapping("/get/{uuid}/")
-    public ResponseEntity<Response> getArtist(@PathVariable("uuid") String uuid){
+    public ResponseEntity<Response> getArtist(@PathVariable("uuid") String uuid) {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("artist",artistService.get(UUID.fromString(uuid))))
+                        .data(Map.of("artist", artistService.get(UUID.fromString(uuid))))
                         .message("Artist retrieved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
@@ -49,11 +50,11 @@ public class ArtistController {
     }
 
     @DeleteMapping("/delete/{uuid}/")
-    public ResponseEntity<Response> deleteArtist(@PathVariable("uuid") String uuid){
+    public ResponseEntity<Response> deleteArtist(@PathVariable("uuid") String uuid) {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("deleted",artistService.delete(UUID.fromString(uuid))))
+                        .data(Map.of("deleted", artistService.delete(UUID.fromString(uuid))))
                         .message("Artist deleted")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
@@ -61,13 +62,12 @@ public class ArtistController {
         );
     }
 
-    @CrossOrigin("*")
     @PostMapping("/save/")
-    public ResponseEntity<Response> saveArtist(@RequestBody @Valid ArtistDto artistDto){
+    public ResponseEntity<Response> saveArtist(@RequestBody @Valid ArtistDto artistDto) {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("artist",artistService.update(artistDto)))
+                        .data(Map.of("artist", artistService.update(artistDto)))
                         .message("Artist saved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
@@ -75,14 +75,13 @@ public class ArtistController {
         );
     }
 
-    @CrossOrigin("*")
     @PostMapping("/create/")
-    public ResponseEntity<Response> createArtist(@RequestBody ArtistDto artistDto){
+    public ResponseEntity<Response> createArtist(@RequestBody ArtistDto artistDto) {
         System.out.println(artistDto);
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("artist",artistService.create(artistDto)))
+                        .data(Map.of("artist", artistService.create(artistDto)))
                         .message("Artist created")
                         .status(HttpStatus.CREATED)
                         .statusCode(HttpStatus.CREATED.value())
@@ -91,7 +90,7 @@ public class ArtistController {
     }
 
     @PostMapping("/test/")
-    public String createArtist(@RequestBody String test){
+    public String createArtist(@RequestBody String test) {
         return test;
     }
 }

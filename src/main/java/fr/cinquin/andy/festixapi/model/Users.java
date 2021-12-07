@@ -29,8 +29,8 @@ public class Users {
     private String email;
     private boolean enabled;
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "USER_AUTHORITY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "AUTHORITY_ID"))
+    @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     @JsonBackReference
     @ToString.Exclude
-    private Set<Authority> authorities;
+    private Set<Role> roles;
 }

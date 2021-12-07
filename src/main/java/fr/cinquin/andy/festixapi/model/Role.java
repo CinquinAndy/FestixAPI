@@ -14,15 +14,15 @@ import java.util.UUID;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Authority {
+public class Role {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
     @Column(nullable = false)
-    private String authority;
-    @ManyToMany(mappedBy = "authorities", fetch= FetchType.LAZY)
+    private String role;
+    @ManyToMany(mappedBy = "roles", fetch= FetchType.LAZY)
     @JsonManagedReference
     @ToString.Exclude
     private Set<Users> users;

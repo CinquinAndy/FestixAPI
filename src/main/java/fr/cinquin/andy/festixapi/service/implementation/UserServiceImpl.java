@@ -23,8 +23,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository adminRepository;
-//    private SimpleSourceDestinationMapper mapper
-//            = Mappers.getMapper(SimpleSourceDestinationMapper.class);
+
     private UserMapper mapper = Mappers.getMapper(UserMapper.class);
 
     @Override
