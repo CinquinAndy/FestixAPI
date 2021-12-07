@@ -22,7 +22,6 @@ import static java.time.LocalDateTime.now;
 public class ArtistController {
     private final ArtistServiceImpl artistService;
 
-
     @GetMapping("/list/")
     public ResponseEntity<Response> getArtists(){
         return ResponseEntity.ok(

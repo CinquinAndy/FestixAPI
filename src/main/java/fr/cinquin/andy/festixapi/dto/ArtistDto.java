@@ -8,11 +8,9 @@ import javax.validation.constraints.NotNull;
 import java.util.Set;
 import java.util.UUID;
 
-@Component
 @Data
 @AllArgsConstructor
 public class ArtistDto {
-    private UUID id;
     @NotNull
     @NotEmpty
     private String artistName;

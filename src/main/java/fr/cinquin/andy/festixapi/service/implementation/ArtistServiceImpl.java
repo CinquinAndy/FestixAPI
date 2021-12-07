@@ -7,7 +7,7 @@ import fr.cinquin.andy.festixapi.dao.repository.ArtistRepository;
 import fr.cinquin.andy.festixapi.service.ArtistService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +22,8 @@ import java.util.UUID;
 public class ArtistServiceImpl implements ArtistService {
     private final ArtistRepository artistRepository;
 
-    @Autowired
-    private ArtistMapper mapper;
+//    private UserMapper mapper = Mappers.getMapper(UserMapper.class);
+    private ArtistMapper mapper = Mappers.getMapper(ArtistMapper.class);
 
     @Override
     public Artist create(ArtistDto artistDto) {

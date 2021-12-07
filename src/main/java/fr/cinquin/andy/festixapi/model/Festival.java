@@ -3,7 +3,6 @@ package fr.cinquin.andy.festixapi.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,7 +10,6 @@ import java.util.Set;
 import java.util.UUID;
 
 //@Table(name = "FESTIVAL")
-@Component
 @Entity
 @Getter
 @Setter

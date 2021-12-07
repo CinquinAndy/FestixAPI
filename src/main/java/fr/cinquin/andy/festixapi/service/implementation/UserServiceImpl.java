@@ -8,6 +8,8 @@ import fr.cinquin.andy.festixapi.dao.repository.UserRepository;
 import fr.cinquin.andy.festixapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +23,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository adminRepository;
-
-    @Autowired
-    private UserMapper mapper;
+//    private SimpleSourceDestinationMapper mapper
+//            = Mappers.getMapper(SimpleSourceDestinationMapper.class);
+    private UserMapper mapper = Mappers.getMapper(UserMapper.class);
 
     @Override
     public List<UserToReturn> list(int limit) {
@@ -42,7 +44,6 @@ public class UserServiceImpl implements UserService {
         Users user = mapper.map(usersDto);
         log.info("Update users... {}", user.getEmail());
         return adminRepository.save(user);
-        return null;
     }
 
     @Override

@@ -8,7 +8,8 @@ import org.mapstruct.Mapping;
 
 @Mapper
 public interface ArtistMapper {
-    @Mapping(target = "authorities", ignore = true)
+    @Mapping(target = "events", ignore = true)
     ArtistDto map(Artist artist);
+    @Mapping(target = "events", ignore = true)
     Artist map(ArtistDto artistDto);
 }

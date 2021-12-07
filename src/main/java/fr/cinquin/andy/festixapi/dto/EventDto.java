@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
-@Component
 @Data
 @AllArgsConstructor
 public class EventDto {
