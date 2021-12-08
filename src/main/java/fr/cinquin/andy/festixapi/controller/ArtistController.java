@@ -1,6 +1,7 @@
 package fr.cinquin.andy.festixapi.controller;
 
 import fr.cinquin.andy.festixapi.dto.ArtistDto;
+import fr.cinquin.andy.festixapi.model.Artist;
 import fr.cinquin.andy.festixapi.model.Response;
 import fr.cinquin.andy.festixapi.model.Role;
 import fr.cinquin.andy.festixapi.service.implementation.ArtistServiceImpl;
@@ -37,10 +38,22 @@ public class ArtistController {
 
     @GetMapping("/get/{uuid}/")
     public ResponseEntity<Response> getArtist(@PathVariable("uuid") String uuid) {
+        Artist result = artistService.get(uuid);
+        if (result == null) {
+            return ResponseEntity.ok(
+                    Response.builder()
+                            .timeStamp(now())
+                            .data(Map.of("artist", ""))
+                            .message("Artist inexistant")
+                            .status(HttpStatus.NOT_FOUND)
+                            .statusCode(HttpStatus.NOT_FOUND.value())
+                            .build()
+            );
+        }
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("artist", artistService.get(UUID.fromString(uuid))))
+                        .data(Map.of("artist", result))
                         .message("Artist retrieved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
@@ -60,7 +73,7 @@ public class ArtistController {
                         .build()
         );
     }
-    
+
 
     @PostMapping("/save/")
     @Secured({Role.ADMIN})

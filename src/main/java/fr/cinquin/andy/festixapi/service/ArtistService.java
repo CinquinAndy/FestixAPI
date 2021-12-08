@@ -16,7 +16,7 @@ import java.util.UUID;
 public interface ArtistService {
     Artist create(ArtistDto artistDto);
     Collection<Artist> list(int limit);
-    Artist get(UUID uuid);
+    Artist get(String uuid);
     Artist update(ArtistDto artistDto);
     Boolean delete(UUID uuid);
 }
