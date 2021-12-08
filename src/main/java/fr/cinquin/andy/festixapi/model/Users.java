@@ -1,6 +1,6 @@
 package fr.cinquin.andy.festixapi.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users implements UserDetails {
+public class Users implements UserDetails, Serializable {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -30,30 +31,35 @@ public class Users implements UserDetails {
     @Column(unique = true)
     private String email;
     private boolean enabled;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "USER_PROFIL", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "PROFIL_ID"))
-    @JsonBackReference
+    //    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "authorities", joinColumns = @JoinColumn(name = "username", referencedColumnName = "username"),
+//            inverseJoinColumns = @JoinColumn(name = "authority", referencedColumnName = "authority"))
+//    @JsonBackReference
+//    @ToString.Exclude
+//    private List<Authority> authorities;
+    @OneToMany(mappedBy = "username", orphanRemoval = true)
     @ToString.Exclude
-    private Set<Profil> profils;
-
-    public List<String> getRoles(){
-        return getProfils().stream()
-                .map(Profil::getCode)
-                .map(profil -> "ROLE_"+profil)
-                .collect(Collectors.toList());
-    }
+    @JsonManagedReference
+    private List<Authorities> authorities;
 
     @Transient
     public String getFullName() {
         return String.format("%s %s", firstname, lastname);
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return AuthorityUtils.commaSeparatedStringToAuthorityList(
                 String.join(",", getRoles())
         );
+    }
+
+    public List<String> getRoles() {
+        return authorities.stream()
+                .map(Authorities::getAuthority)
+                .map(Authority::getAuthority)
+                .map(authority -> "ROLE_" + authority)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -80,12 +86,6 @@ public class Users implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
-//    public boolean isCredentialsExpired() {
-//        boolean mdpIsExpired = getDateMajMdp() == null || getDateMajMdp().plusMonths(6).isBefore(LocalDateTime.now());
-//        boolean hasProfilWebService = getUtilisateur().getUtilisateurProfils().stream().anyMatch(u -> u.getProfil().getCode().equals(Role.WEB_SERVICE));
-//        return mdpIsExpired && !hasProfilWebService;
-//    }
 
     @Override
     public boolean isEnabled() {

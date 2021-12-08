@@ -27,9 +27,15 @@ public class UserServiceImpl implements UserService {
     private UserMapper mapper = Mappers.getMapper(UserMapper.class);
 
     @Override
-    public List<UserToReturn> list(int limit) {
-        log.info("List admin... limit : {}", limit);
+    public List<UserToReturn> list() {
+        log.info("List admin... limit : {}");
         return adminRepository.findAllBy();
+    }
+
+    @Override
+    public List<Users> listComplete(int limit) {
+        log.info("List admin... limit : {}", limit);
+        return adminRepository.findAll();
     }
 
     @Override

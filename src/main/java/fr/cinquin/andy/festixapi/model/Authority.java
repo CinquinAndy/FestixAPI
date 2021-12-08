@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -14,16 +15,20 @@ import java.util.UUID;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Profil {
+public class Authority {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
-    @Column(nullable = false)
-    private String code;
-    @ManyToMany(mappedBy = "profils", fetch = FetchType.LAZY)
+    @Column(nullable = false, unique = true)
+    private String authority;
+//    @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
+//    @JsonManagedReference
+//    @ToString.Exclude
+//    private Set<Users> users;
+    @OneToMany(mappedBy = "authority", orphanRemoval = true)
     @JsonManagedReference
     @ToString.Exclude
-    private Set<Users> users;
+    private List<Authorities> authorities;
 }

@@ -12,7 +12,8 @@ import java.util.UUID;
 @Service
 @Transactional
 public interface UserService {
-    List<UserToReturn> list(int limit);
+    List<UserToReturn> list();
+    List<Users> listComplete(int limit);
     Users get(UUID uuid);
     Users update(UserDto userDto);
     Boolean delete(UUID uuid);

@@ -2,12 +2,12 @@ package fr.cinquin.andy.festixapi;
 
 import fr.cinquin.andy.festixapi.dao.repository.*;
 import fr.cinquin.andy.festixapi.model.*;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
@@ -27,17 +27,25 @@ public class FestixApiApplication {
     }
 
     @Bean
-    CommandLineRunner run(UserRepository userRepository, FestivalRepository festivalRepository, EventRepository eventRepository, ArtistRepository artistRepository, AuthorityRepository authorityRepository) {
+    CommandLineRunner run(UserRepository userRepository, FestivalRepository festivalRepository, EventRepository eventRepository, ArtistRepository artistRepository, AuthorityRepository authorityRepository, AuthoritiesRepository authoritiesRepository) {
         return args -> {
-            Profil role = new Profil(null, "ROLE_USER", null);
-            Profil role2 = new Profil(null, "ROLE_ADMIN", null);
-            Set<Profil> roles = new HashSet<>(List.of(role, role2));
-            authorityRepository.save(role);
-            authorityRepository.save(role2);
-            userRepository.save(new Users(null, "andy", "Andy", "Cinquin", passwordEncoder.encode("password"), "cinquin.andy@gmail.com", true, new HashSet<>(List.of(role))));
-            userRepository.save(new Users(null, "test", "test", "test", passwordEncoder.encode("test"), "test.test@test.com", true, new HashSet<>(List.of(role))));
-            userRepository.save(new Users(null, "andy2", "Andy2", "Cinquin2", passwordEncoder.encode("password2"), "cinquin.andy2@gmail.com", true, new HashSet<>(List.of(role2))));
-            userRepository.save(new Users(null, "andy3", "Andy3", "Cinquin3", passwordEncoder.encode("password3"), "cinquin.andy3@gmail.com", true, new HashSet<>(List.of(role, role2))));
+            Authority admin = new Authority(null, "ADMIN", null);
+            Authority user = new Authority(null, "USER", null);
+            authorityRepository.save(admin);
+            authorityRepository.save(user);
+
+            Users andy = new Users(null, "andy", "Andy", "Cinquin", passwordEncoder.encode("password"), "cinquin.andy@gmail.com", true, null);
+            Users test = new Users(null, "test", "test", "test", passwordEncoder.encode("test"), "test.test@test.com", true, null);
+            Users andy2 = new Users(null, "andy2", "Andy2", "Cinquin2", passwordEncoder.encode("password2"), "cinquin.andy2@gmail.com", true, null);
+            Users andy3 = new Users(null, "andy3", "Andy3", "Cinquin3", passwordEncoder.encode("password3"), "cinquin.andy3@gmail.com", true, null);
+
+            userRepository.save(andy);
+            userRepository.save(test);
+            userRepository.save(andy2);
+            userRepository.save(andy3);
+
+            Authorities authorities = new Authorities(null, andy, admin);
+            authoritiesRepository.save(authorities);
 
             Festival festival = new Festival(null, "Premier festival", "Description", "photoUrl", LocalDate.now(), LocalDate.now(), null);
             Festival festival2 = new Festival(null, "Premier festival2", "Description2", "photoUrl2", LocalDate.now(), LocalDate.now(), null);

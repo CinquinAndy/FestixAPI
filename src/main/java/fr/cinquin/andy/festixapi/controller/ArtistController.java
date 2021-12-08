@@ -24,6 +24,7 @@ public class ArtistController {
     private final ArtistServiceImpl artistService;
 
     @GetMapping("/list/")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Response> getArtists() {
         return ResponseEntity.ok(
                 Response.builder()
@@ -90,6 +91,7 @@ public class ArtistController {
     }
 
     @PostMapping("/create/")
+    @Secured({Role.ADMIN})
     public ResponseEntity<Response> createArtist(@RequestBody ArtistDto artistDto) {
         System.out.println(artistDto);
         return ResponseEntity.ok(
