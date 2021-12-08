@@ -60,6 +60,7 @@ public class ArtistController {
                         .build()
         );
     }
+    
 
     @PostMapping("/save/")
     @Secured({Role.ADMIN})
