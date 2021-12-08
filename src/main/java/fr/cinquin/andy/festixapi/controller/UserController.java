@@ -25,7 +25,7 @@ public class UserController {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("users", userService.listComplete(100)))
+                        .data(Map.of("users", userService.list()))
                         .message("Users retrieved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())

@@ -1,5 +1,6 @@
 package fr.cinquin.andy.festixapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users implements UserDetails, Serializable {
+public class Users implements UserDetails {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -31,16 +32,22 @@ public class Users implements UserDetails, Serializable {
     @Column(unique = true)
     private String email;
     private boolean enabled;
-    //    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "authorities", joinColumns = @JoinColumn(name = "username", referencedColumnName = "username"),
-//            inverseJoinColumns = @JoinColumn(name = "authority", referencedColumnName = "authority"))
-//    @JsonBackReference
-//    @ToString.Exclude
-//    private List<Authority> authorities;
-    @OneToMany(mappedBy = "username", orphanRemoval = true)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "authorities", joinColumns = @JoinColumn(name = "username", referencedColumnName = "username"),
+            inverseJoinColumns = @JoinColumn(name = "authority", referencedColumnName = "authority"))
+    @JsonBackReference
     @ToString.Exclude
-    @JsonManagedReference
-    private List<Authorities> authorities;
+    private List<Authority> authorities_users;
+
+//    private String authorities_string;
+
+//    public String getAuthorities_string() {
+//        return String.join(",", getRoles());
+//    }
+    //    @OneToMany(mappedBy = "username", orphanRemoval = true)
+//    @ToString.Exclude
+//    @JsonManagedReference
+//    private List<Authorities> authorities;
 
     @Transient
     public String getFullName() {
@@ -55,8 +62,7 @@ public class Users implements UserDetails, Serializable {
     }
 
     public List<String> getRoles() {
-        return authorities.stream()
-                .map(Authorities::getAuthority)
+        return authorities_users.stream()
                 .map(Authority::getAuthority)
                 .map(authority -> "ROLE_" + authority)
                 .collect(Collectors.toList());

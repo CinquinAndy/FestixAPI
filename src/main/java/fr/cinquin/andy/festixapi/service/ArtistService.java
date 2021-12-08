@@ -18,5 +18,5 @@ public interface ArtistService {
     Collection<Artist> list(int limit);
     Artist get(String uuid);
     Artist update(ArtistDto artistDto);
-    Boolean delete(UUID uuid);
+    Boolean delete(String uuid);
 }

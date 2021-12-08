@@ -23,12 +23,8 @@ public class Authority {
     private UUID id;
     @Column(nullable = false, unique = true)
     private String authority;
-//    @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
-//    @JsonManagedReference
-//    @ToString.Exclude
-//    private Set<Users> users;
-    @OneToMany(mappedBy = "authority", orphanRemoval = true)
+    @ManyToMany(mappedBy = "authorities_users", fetch = FetchType.LAZY)
     @JsonManagedReference
     @ToString.Exclude
-    private List<Authorities> authorities;
+    private Set<Users> users;
 }

@@ -1,4 +1,7 @@
 spring:
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
   datasource:
     password: xhesHLa7qKAK
     url: jdbc:postgresql://localhost:5432/festix

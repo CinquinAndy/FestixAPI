@@ -24,7 +24,7 @@ public class ArtistController {
     private final ArtistServiceImpl artistService;
 
     @GetMapping("/list/")
-    @Secured({"ROLE_ADMIN"})
+//    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Response> getArtists() {
         return ResponseEntity.ok(
                 Response.builder()
@@ -67,7 +67,7 @@ public class ArtistController {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("deleted", artistService.delete(UUID.fromString(uuid))))
+                        .data(Map.of("deleted", artistService.delete(uuid)))
                         .message("Artist deleted")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
@@ -76,9 +76,9 @@ public class ArtistController {
     }
 
 
-    @PostMapping("/save/")
-    @Secured({Role.ADMIN})
-    public ResponseEntity<Response> saveArtist(@RequestBody @Valid ArtistDto artistDto) {
+    @PatchMapping("/update/{uuid}/")
+    public ResponseEntity<Response> saveArtist(@RequestBody @Valid ArtistDto artistDto, @PathVariable("uuid") String uuid) {
+        artistDto.setId(UUID.fromString(uuid));
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
@@ -91,7 +91,7 @@ public class ArtistController {
     }
 
     @PostMapping("/create/")
-    @Secured({Role.ADMIN})
+//    @Secured({Role.ADMIN})
     public ResponseEntity<Response> createArtist(@RequestBody ArtistDto artistDto) {
         System.out.println(artistDto);
         return ResponseEntity.ok(

@@ -51,9 +51,12 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public Boolean delete(UUID uuid) {
+    public Boolean delete(String uuid) {
         log.info("delete Artist... {}", uuid);
-        artistRepository.deleteById(uuid);
-        return Boolean.TRUE;
+        Boolean exists = artistRepository.existsById(UUID.fromString(uuid)) ? Boolean.TRUE : Boolean.FALSE;
+        if(exists == Boolean.TRUE) {
+            artistRepository.delete(artistRepository.getById(UUID.fromString(uuid)));
+        }
+        return exists;
     }
 }
