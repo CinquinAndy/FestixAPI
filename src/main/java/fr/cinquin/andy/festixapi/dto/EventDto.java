@@ -13,7 +13,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class EventDto {
     private UUID id;
-
     @NotNull
     @NotEmpty
     private String title;
@@ -22,7 +21,6 @@ public class EventDto {
     private LocalDateTime dateTime;
     @NotNull
     @NotEmpty
-    private UUID festival;
-
+    private String festival;
     private Set<UUID> artists;
 }

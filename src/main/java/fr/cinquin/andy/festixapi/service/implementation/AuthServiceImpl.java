@@ -21,7 +21,7 @@ import javax.transaction.Transactional;
 public class AuthServiceImpl implements AuthService {
     private final UserRepository adminRepository;
 
-    private UserMapper mapper = Mappers.getMapper(UserMapper.class);
+    private final UserMapper mapper = Mappers.getMapper(UserMapper.class);
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -33,6 +33,7 @@ public class AuthServiceImpl implements AuthService {
             return null;
         } else {
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            user.setEnabled(true);
             adminRepository.save(user);
             return user;
         }

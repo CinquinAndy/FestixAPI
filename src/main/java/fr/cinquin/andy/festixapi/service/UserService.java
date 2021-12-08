@@ -1,6 +1,5 @@
 package fr.cinquin.andy.festixapi.service;
 
-import fr.cinquin.andy.festixapi.dto.UserDto;
 import fr.cinquin.andy.festixapi.model.UserToReturn;
 import fr.cinquin.andy.festixapi.model.Users;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,7 @@ import java.util.UUID;
 public interface UserService {
     List<UserToReturn> list();
     List<Users> listComplete(int limit);
-    Users get(UUID uuid);
-    Users update(UserDto userDto);
-    Boolean delete(UUID uuid);
+    UserToReturn get(UUID uuid);
+//    Users update(UserDto userDto);
+    Boolean delete(String uuid);
 }

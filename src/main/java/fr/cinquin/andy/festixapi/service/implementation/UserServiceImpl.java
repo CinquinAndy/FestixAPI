@@ -1,16 +1,11 @@
 package fr.cinquin.andy.festixapi.service.implementation;
 
-import fr.cinquin.andy.festixapi.dto.UserDto;
-import fr.cinquin.andy.festixapi.mapper.UserMapper;
 import fr.cinquin.andy.festixapi.model.UserToReturn;
 import fr.cinquin.andy.festixapi.model.Users;
 import fr.cinquin.andy.festixapi.dao.repository.UserRepository;
 import fr.cinquin.andy.festixapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
-import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -24,37 +19,30 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
     private final UserRepository adminRepository;
 
-    private UserMapper mapper = Mappers.getMapper(UserMapper.class);
+//    private final UserMapper mapper = Mappers.getMapper(UserMapper.class);
 
     @Override
     public List<UserToReturn> list() {
-        log.info("List admin... limit : {}");
         return adminRepository.findAllBy();
     }
 
     @Override
     public List<Users> listComplete(int limit) {
-        log.info("List admin... limit : {}", limit);
         return adminRepository.findAll();
     }
 
     @Override
-    public Users get(UUID uuid) {
-        log.info("get Users... {}", uuid);
-        return adminRepository.getById(uuid);
+    public UserToReturn get(UUID uuid) {
+        return adminRepository.findAllById(uuid);
     }
 
     @Override
-    public Users update(UserDto usersDto) {
-        Users user = mapper.map(usersDto);
-        log.info("Update users... {}", user.getEmail());
-        return adminRepository.save(user);
-    }
-
-    @Override
-    public Boolean delete(UUID uuid) {
-        log.info("delete Users... {}", uuid);
-        adminRepository.deleteById(uuid);
-        return Boolean.TRUE;
+    public Boolean delete(String uuid) {
+        log.info("delete User... {}", uuid);
+        Boolean exists = adminRepository.existsById(UUID.fromString(uuid)) ? Boolean.TRUE : Boolean.FALSE;
+        if(exists == Boolean.TRUE) {
+            adminRepository.delete(adminRepository.getById(UUID.fromString(uuid)));
+        }
+        return exists;
     }
 }

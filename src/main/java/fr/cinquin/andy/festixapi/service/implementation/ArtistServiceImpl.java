@@ -22,7 +22,7 @@ import java.util.UUID;
 public class ArtistServiceImpl implements ArtistService {
     private final ArtistRepository artistRepository;
 
-    private ArtistMapper mapper = Mappers.getMapper(ArtistMapper.class);
+    private final ArtistMapper mapper = Mappers.getMapper(ArtistMapper.class);
 
     @Override
     public Artist create(ArtistDto artistDto) {

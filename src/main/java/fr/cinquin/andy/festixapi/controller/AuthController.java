@@ -34,18 +34,4 @@ public class AuthController {
                         .build()
         );
     }
-
-//     todo login
-//    @PostMapping("/login/")
-//    public ResponseEntity<Response> saveAdmin(@RequestBody @Valid UserDto adminDto){
-//        return ResponseEntity.ok(
-//                Response.builder()
-//                        .timeStamp(now())
-//                        .data(Map.of("user",authService.register(adminDto)))
-//                        .message("Users created")
-//                        .status(HttpStatus.OK)
-//                        .statusCode(HttpStatus.OK.value())
-//                        .build()
-//        );
-//    }
 }
