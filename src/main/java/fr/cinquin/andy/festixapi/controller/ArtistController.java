@@ -1,18 +1,15 @@
 package fr.cinquin.andy.festixapi.controller;
 
 import fr.cinquin.andy.festixapi.dto.ArtistDto;
-import fr.cinquin.andy.festixapi.mapper.ArtistMapper;
 import fr.cinquin.andy.festixapi.model.Response;
 import fr.cinquin.andy.festixapi.model.Role;
 import fr.cinquin.andy.festixapi.service.implementation.ArtistServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.Map;
 import java.util.UUID;
@@ -65,8 +62,7 @@ public class ArtistController {
     }
 
     @PostMapping("/save/")
-//    @Secured("USERS")
-    @Secured("ROLE_ADMIN")
+    @Secured({Role.ADMIN})
     public ResponseEntity<Response> saveArtist(@RequestBody @Valid ArtistDto artistDto) {
         return ResponseEntity.ok(
                 Response.builder()

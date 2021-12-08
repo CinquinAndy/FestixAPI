@@ -29,9 +29,9 @@ public class FestixApiApplication {
     @Bean
     CommandLineRunner run(UserRepository userRepository, FestivalRepository festivalRepository, EventRepository eventRepository, ArtistRepository artistRepository, AuthorityRepository authorityRepository) {
         return args -> {
-            Role role = new Role(null, "ROLE_USER", null);
-            Role role2 = new Role(null, "ROLE_ADMIN", null);
-            Set<Role> roles = new HashSet<>(List.of(role, role2));
+            Profil role = new Profil(null, "ROLE_USER", null);
+            Profil role2 = new Profil(null, "ROLE_ADMIN", null);
+            Set<Profil> roles = new HashSet<>(List.of(role, role2));
             authorityRepository.save(role);
             authorityRepository.save(role2);
             userRepository.save(new Users(null, "andy", "Andy", "Cinquin", passwordEncoder.encode("password"), "cinquin.andy@gmail.com", true, new HashSet<>(List.of(role))));

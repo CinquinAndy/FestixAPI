@@ -9,14 +9,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
-//implements UserDetails
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users {
+public class Users implements UserDetails {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -31,49 +31,64 @@ public class Users {
     private String email;
     private boolean enabled;
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+    @JoinTable(name = "USER_PROFIL", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "PROFIL_ID"))
     @JsonBackReference
     @ToString.Exclude
-    private Set<Role> roles;
-//
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        List<String> liste = new ArrayList<>();
-//        for (Role r:roles) {
-//            liste.add(r.getRole());
-//        }
-//        return AuthorityUtils.commaSeparatedStringToAuthorityList(
-//                String.join(",", liste)
-//        );
+    private Set<Profil> profils;
+
+    public List<String> getRoles(){
+        return getProfils().stream()
+                .map(Profil::getCode)
+                .map(profil -> "ROLE_"+profil)
+                .collect(Collectors.toList());
+    }
+
+    @Transient
+    public String getFullName() {
+        return String.format("%s %s", firstname, lastname);
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return AuthorityUtils.commaSeparatedStringToAuthorityList(
+                String.join(",", getRoles())
+        );
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+//    public boolean isCredentialsExpired() {
+//        boolean mdpIsExpired = getDateMajMdp() == null || getDateMajMdp().plusMonths(6).isBefore(LocalDateTime.now());
+//        boolean hasProfilWebService = getUtilisateur().getUtilisateurProfils().stream().anyMatch(u -> u.getProfil().getCode().equals(Role.WEB_SERVICE));
+//        return mdpIsExpired && !hasProfilWebService;
 //    }
-//
-//    @Override
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    @Override
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonLocked() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isCredentialsNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isEnabled() {
-//        return enabled;
-//    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
 }
