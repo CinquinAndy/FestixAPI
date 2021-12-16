@@ -47,11 +47,24 @@ public class FestixApiApplication {
 //            Authorities authorities = new Authorities(null, andy, admin);
 //            authoritiesRepository.save(authorities);
 
-            Festival festival = new Festival(null, "Premier festival", "Description", "photoUrl", LocalDate.now(), LocalDate.now(), null);
-            Festival festival2 = new Festival(null, "Premier festival2", "Description2", "photoUrl2", LocalDate.now(), LocalDate.now(), null);
-            Festival festival3 = new Festival(null, "Premier festival3", "Description3", "photoUrl3", LocalDate.now(), LocalDate.now(), null);
-            Festival festival4 = new Festival(null, "Premier festival4", "Description4", "photoUrl4", LocalDate.now(), LocalDate.now(), null);
-            Festival festival5 = new Festival(null, "Premier festival5", "Description5", "photoUrl5", LocalDate.now(), LocalDate.now(), null);
+            Festival festival = new Festival(null, "Eurockéennes de Belfort", "Candy canes marshmallow chocolate bar gummi bears marzipan cake muffin bear claw. Pudding topping caramels carrot cake chocolate cake. Ice cream chupa chups chocolate bonbon muffin.\n" +
+                    "\n" +
+                    "Chocolate bar bonbon muffin halvah tootsie roll muffin jelly-o jujubes wafer. Shortbread chocolate icing chupa chups shortbread jelly macaroon chupa chups. Apple pie carrot cake toffee sesame snaps brownie. Ice cream jelly beans candy tiramisu lemon drops marshmallow danish icing gingerbread.",
+                    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80", LocalDate.now(), LocalDate.now().plusDays(1), null);
+            Festival festival2 = new Festival(null, "Festival des vieilles charrues", "Soufflé chocolate dessert sweet roll soufflé dragée. Cotton candy chupa chups cake halvah ice cream sugar plum sugar plum. Liquorice toffee cake tiramisu sesame snaps. Pie oat cake chocolate gummi bears gummi bears chocolate bar donut chupa chups cupcake.\n" +
+                    "\n" +
+                    "Dragée jujubes apple pie tart liquorice. Cake dragée cake powder soufflé ice cream gingerbread fruitcake brownie. Donut tart marshmallow caramels caramels oat cake soufflé.",
+                    "https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80", LocalDate.now().plusDays(1), LocalDate.now().plusDays(2), null);
+            Festival festival3 = new Festival(null, "Hellfest", "Wafer topping lollipop chocolate bear claw candy canes ice cream macaroon danish. Pie tootsie roll chocolate cake soufflé topping halvah cookie. Croissant shortbread gingerbread liquorice sesame snaps cake. Candy tiramisu dragée cheesecake cupcake jelly-o sweet roll.",
+                    "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80", LocalDate.now().plusDays(3), LocalDate.now().plusDays(4), null);
+            Festival festival4 = new Festival(null, "Les Nuits Secrètes", "Jelly beans cheesecake dragée pie gingerbread caramels shortbread. Brownie chocolate chupa chups biscuit toffee pie jelly. Chocolate cake sweet apple pie lollipop chocolate bar shortbread marshmallow.\n" +
+                    "\n" +
+                    "Sweet cookie topping brownie dragée chocolate cake cotton candy wafer biscuit. Danish jelly-o tart gingerbread biscuit. Tart cake tootsie roll candy croissant. Danish marshmallow jelly-o carrot cake pastry sweet icing chocolate bar.",
+                    "https://images.unsplash.com/photo-1505842465776-3b4953ca4f44?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80", LocalDate.now().plusDays(5), LocalDate.now().plusDays(6), null);
+            Festival festival5 = new Festival(null, "Main Square", "Tart bear claw oat cake tootsie roll liquorice muffin pie. Dessert tart sesame snaps liquorice cookie cupcake muffin. Jelly-o candy pastry halvah cotton candy jelly beans gummi bears.\n" +
+                    "\n" +
+                    "Chocolate bar cookie chocolate bar pastry jelly dessert. Wafer soufflé marshmallow wafer macaroon. Liquorice caramels cake halvah chocolate cake dessert tootsie roll.",
+                    "https://images.unsplash.com/photo-1619229666372-3c26c399a4cb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80", LocalDate.now().plusDays(7), LocalDate.now().plusDays(8), null);
             festivalRepository.save(festival);
             festivalRepository.save(festival2);
             festivalRepository.save(festival3);
