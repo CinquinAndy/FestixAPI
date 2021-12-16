@@ -39,16 +39,6 @@ public class Users implements UserDetails {
     @ToString.Exclude
     private List<Authority> authorities_users;
 
-//    private String authorities_string;
-
-//    public String getAuthorities_string() {
-//        return String.join(",", getRoles());
-//    }
-    //    @OneToMany(mappedBy = "username", orphanRemoval = true)
-//    @ToString.Exclude
-//    @JsonManagedReference
-//    private List<Authorities> authorities;
-
     @Transient
     public String getFullName() {
         return String.format("%s %s", firstname, lastname);

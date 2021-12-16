@@ -23,13 +23,13 @@ public class Artist {
     private UUID id;
     @Column(name = "ARTIST_NAME", nullable = false)
     private String artistName;
-    @Column(name = "DESCRIPTION", nullable = false)
+    @Column(name = "DESCRIPTION", nullable = false, columnDefinition = "text")
     private String description;
     @Column(name = "MUSIC_STYLE", nullable = false)
     private String musicStyle;
-    @Column(name = "PHOTO_URL", nullable = false)
+    @Column(name = "PHOTO_URL", nullable = false, length = 2048)
     private String photoUrl;
-    @ManyToMany(mappedBy = "artists", fetch=FetchType.LAZY)
+    @ManyToMany(mappedBy = "artists", fetch = FetchType.LAZY)
     @JsonManagedReference
     @ToString.Exclude
     private Set<Event> events;

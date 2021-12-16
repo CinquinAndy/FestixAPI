@@ -24,9 +24,9 @@ public class Festival {
     private UUID id;
     @Column(name = "TITLE", nullable = false)
     private String title;
-    @Column(name = "DESCRIPTION", nullable = false)
+    @Column(name = "DESCRIPTION", nullable = false, columnDefinition = "text")
     private String description;
-    @Column(name = "PHOTO_URL", nullable = false)
+    @Column(name = "PHOTO_URL", nullable = false, length = 2048)
     private String photoUrl;
     @Column(name = "DATE_START", nullable = false)
     private LocalDate dateStart;
