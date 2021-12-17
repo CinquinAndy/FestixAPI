@@ -32,8 +32,8 @@ public class Festival {
     private LocalDate dateStart;
     @Column(name = "DATE_END")
     private LocalDate dateEnd;
-    @OneToMany(mappedBy = "festival")
-    @JsonManagedReference
-    @ToString.Exclude
-    private Set<Event> events;
+//    @OneToMany(mappedBy = "festival")
+//    @JsonManagedReference
+//    @ToString.Exclude
+//    private Set<Event> events;
 }
