@@ -43,6 +43,11 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public Collection<Event> byfestival(String uuid) {
+        return eventRepository.findAllByFestival(UUID.fromString(uuid));
+    }
+
+    @Override
     public Event update(EventDto eventDto) {
         Event event = mapper.map(eventDto);
         return eventRepository.save(event);

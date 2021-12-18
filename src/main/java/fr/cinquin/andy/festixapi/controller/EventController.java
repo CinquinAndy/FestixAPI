@@ -34,6 +34,19 @@ public class EventController {
         );
     }
 
+    @GetMapping("/list/byfestival/{idfestival}")
+    public ResponseEntity<Response> getEventsByFestival(@PathVariable("idfestival") String uuid) {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("events", eventService.byfestival(uuid)))
+                        .message("Events retrieved")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .build()
+        );
+    }
+
     @GetMapping("/get/{uuid}/")
     public ResponseEntity<Response> getEvent(@PathVariable("uuid") String uuid) {
         Event result = eventService.get(uuid);

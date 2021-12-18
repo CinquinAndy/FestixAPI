@@ -13,6 +13,7 @@ public interface EventService {
     Event create(EventDto event);
     Collection<Event> list(int limit);
     Event get(String uuid);
+    Collection<Event> byfestival(String uuid);
     Event update(EventDto event);
     Boolean delete(String uuid);
 }
