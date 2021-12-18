@@ -35,7 +35,7 @@ public class FestivalServiceImpl implements FestivalService {
     @Override
     public Collection<Festival> list(int limit) {
         log.info("List festival... limit : {}", limit);
-        return festivalRepository.findAll(PageRequest.of(0, limit)).toList();
+        return festivalRepository.findAll(PageRequest.of(0, limit, Sort.by(Sort.Direction.ASC, "dateStart"))).toList();
     }
 
     @Override

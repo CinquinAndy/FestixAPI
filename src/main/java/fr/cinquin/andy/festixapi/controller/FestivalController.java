@@ -34,6 +34,33 @@ public class FestivalController {
         );
     }
 
+    @GetMapping("/list/limit/{number}")
+    public ResponseEntity<Response> getFestivalsLimited(@PathVariable("number") String number) {
+        Integer num;
+        try {
+            num = Integer.parseInt(number);
+        } catch(NumberFormatException e) {
+            return ResponseEntity.ok(
+                    Response.builder()
+                            .timeStamp(now())
+                            .data(Map.of("festival", ""))
+                            .message("paramètre non valid")
+                            .status(HttpStatus.BAD_REQUEST)
+                            .statusCode(HttpStatus.BAD_REQUEST.value())
+                            .build()
+            );
+        }
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("festivals", festivalService.list(num)))
+                        .message("Festivals retrieved")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .build()
+        );
+    }
+
 
     @GetMapping("/last/")
     public ResponseEntity<Response> getLast() {
