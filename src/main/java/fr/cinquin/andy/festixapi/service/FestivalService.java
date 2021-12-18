@@ -13,6 +13,7 @@ public interface FestivalService {
     Festival create(FestivalDto festival);
     Collection<Festival> list(int limit);
     Festival get(String uuid);
+    Festival last();
     Festival update(FestivalDto festival);
     Boolean delete(String uuid);
 }

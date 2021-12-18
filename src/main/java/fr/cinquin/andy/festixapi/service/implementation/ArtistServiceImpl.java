@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Transactional
@@ -35,6 +37,15 @@ public class ArtistServiceImpl implements ArtistService {
     public Collection<Artist> list(int limit) {
         log.info("List artist... limit : {}", limit);
         return artistRepository.findAll(PageRequest.of(0, limit)).toList();
+    }
+
+    @Override
+    public Artist random() {
+        Random rand = new Random(); //instance of random class
+        List<Artist> artistList = artistRepository.findAll(PageRequest.of(0, 100)).toList();
+        int upperbound = artistList.size();
+        int int_random = rand.nextInt(upperbound);
+        return artistList.get(int_random);
     }
 
     @Override

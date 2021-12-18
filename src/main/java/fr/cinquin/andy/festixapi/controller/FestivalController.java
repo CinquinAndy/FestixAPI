@@ -34,6 +34,20 @@ public class FestivalController {
         );
     }
 
+
+    @GetMapping("/last/")
+    public ResponseEntity<Response> getLast() {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("festivals", festivalService.last()))
+                        .message("Festivals retrieved")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .build()
+        );
+    }
+
     @GetMapping("/get/{uuid}/")
     public ResponseEntity<Response> getFestival(@PathVariable("uuid") String uuid) {
         Festival result = festivalService.get(uuid);

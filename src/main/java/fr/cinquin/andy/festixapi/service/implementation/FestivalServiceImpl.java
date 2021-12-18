@@ -9,10 +9,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Transactional
@@ -37,10 +39,17 @@ public class FestivalServiceImpl implements FestivalService {
     }
 
     @Override
+    public Festival last() {
+        List<Festival> festivalList = festivalRepository.findAll(Sort.by(Sort.Direction.ASC,"dateStart"));
+        return festivalList.get(0);
+    }
+
+    @Override
     public Festival get(String uuid) {
         log.info("get Festival... {}", uuid);
         return festivalRepository.existsById(UUID.fromString(uuid)) ? festivalRepository.getById(UUID.fromString(uuid)) : null;
     }
+
 
     @Override
     public Festival update(FestivalDto festivalDto) {

@@ -36,11 +36,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService);
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {//        auth.userDetailsService(userDetailsService);
         auth.jdbcAuthentication().dataSource(dataSource);
-//                .usersByUsernameQuery("select username, password, enabled from users where username = ?");
-////                .authoritiesByUsernameQuery("select u.username, pr.code from users u inner join user_profil up on u.id=up.user_id inner join profil pr on pr.id=up.profil_id where u.username = ?");
     }
 
     @Bean
@@ -62,15 +59,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .ignoringAntMatchers("/login")
-//                .ignoringAntMatchers("/artist/create/","/artist/delete/**","/artist/save/")
-//                .ignoringAntMatchers("/artist/create/","/artist/delete/**","/artist/save/")
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
                 .authorizeRequests()
                 .antMatchers("/artist/create/","/artist/delete/*/","/artist/update/*/").authenticated()
                 .antMatchers("/event/create/","/event/delete/*/","/event/update/*/").authenticated()
                 .antMatchers("/festival/create/","/festival/delete/*/","/festival/update/*/").authenticated()
-//                .antMatchers("/secured/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/**").permitAll()
                 .and()
                 .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)

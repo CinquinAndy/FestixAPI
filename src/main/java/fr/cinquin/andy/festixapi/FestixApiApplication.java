@@ -71,11 +71,32 @@ public class FestixApiApplication {
             festivalRepository.save(festival4);
             festivalRepository.save(festival5);
 
-            Artist artist1 = new Artist(null, "Nom d'artiste", "Description d'artiste", "Style de musique d'artiste", "Photo d'artiste", null);
-            Artist artist2 = new Artist(null, "Nom d'artiste2", "Description d'artiste2", "Style de musique d'artiste2", "Photo d'artiste2", null);
-            Artist artist3 = new Artist(null, "Nom d'artiste3", "Description d'artiste3", "Style de musique d'artiste3", "Photo d'artiste3", null);
-            Artist artist4 = new Artist(null, "Nom d'artiste4", "Description d'artiste4", "Style de musique d'artiste4", "Photo d'artiste4", null);
-            Artist artist5 = new Artist(null, "Nom d'artiste5", "Description d'artiste5", "Style de musique d'artiste5", "Photo d'artiste5", null);
+            Artist artist1 = new Artist(null, "Kamil Feczko",
+                    "Fruitcake candy dessert caramels jelly beans tootsie roll. Cheesecake liquorice croissant gummi bears apple pie oat cake lollipop. Chocolate donut lemon drops sesame snaps fruitcake icing pastry. Icing tiramisu tootsie roll gingerbread pie halvah sweet.",
+                    "Pop, Rock, Rap",
+                    "https://images.unsplash.com/photo-1526218626217-dc65a29bb444?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                    null);
+            Artist artist2 = new Artist(null, "Jason Rosewell",
+                    "Lollipop apple pie halvah jujubes jelly beans marzipan tart. Chupa chups jelly-o brownie cookie sweet apple pie marshmallow gingerbread jelly-o. Jujubes lemon drops muffin chocolate cake dragée apple pie.",
+                    "Rock, Blues, Pop",
+                    "https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+                    null);
+            Artist artist3 = new Artist(null, "Melanie Van Leeuwen",
+                    "Chocolate cake oat cake cupcake sweet roll brownie chocolate jujubes jelly beans. Jujubes muffin dessert pie gummies jujubes cake shortbread topping. Brownie gingerbread cupcake powder powder toffee.",
+                    "Classique, Rock",
+                    "https://images.unsplash.com/photo-1565145368739-29e5a81be478?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                    null);
+            Artist artist4 = new Artist(null, "Claudia Rayia",
+                    "Biscuit bonbon gummi bears chocolate cake cotton candy muffin jelly beans powder. Powder liquorice chocolate macaroon sesame snaps sesame snaps wafer oat cake. Topping dessert cheesecake ice cream oat cake ice cream sweet roll.",
+                    "Classique, Chill",
+                    "https://images.unsplash.com/photo-1608319917470-9d9179430f8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                    null);
+            Artist artist5 = new Artist(null, "Zoé Gomez",
+                    "Wafer tootsie roll pudding jelly beans tart croissant donut biscuit. Jelly candy donut fruitcake tart apple pie. Cotton candy carrot cake icing sesame snaps candy. Chupa chups topping toffee tart cake danish caramels.",
+                    "Rock, Blues, Pop",
+                    "https://images.unsplash.com/photo-1597169428801-7c1adf2623bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1202&q=80",
+                    null);
+
             artistRepository.save(artist1);
             artistRepository.save(artist2);
             artistRepository.save(artist3);

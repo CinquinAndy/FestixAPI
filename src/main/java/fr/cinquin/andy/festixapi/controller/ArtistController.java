@@ -36,6 +36,19 @@ public class ArtistController {
         );
     }
 
+    @GetMapping("/random/")
+    public ResponseEntity<Response> getRandomArtist() {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("artists", artistService.random()))
+                        .message("Artist retrieved")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .build()
+        );
+    }
+
     @GetMapping("/get/{uuid}/")
     public ResponseEntity<Response> getArtist(@PathVariable("uuid") String uuid) {
         Artist result = artistService.get(uuid);
