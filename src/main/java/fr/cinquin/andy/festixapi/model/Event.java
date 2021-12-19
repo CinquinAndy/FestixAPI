@@ -35,4 +35,6 @@ public class Event {
     @JsonBackReference
     @ToString.Exclude
     private Set<Artist> artists;
+    @Column(name = "ARTISTENAVANT")
+    private String artistEnAvant;
 }

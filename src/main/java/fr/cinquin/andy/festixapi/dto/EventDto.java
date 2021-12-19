@@ -22,5 +22,8 @@ public class EventDto {
     @NotNull
     @NotEmpty
     private String festival;
+    @NotNull
+    @NotEmpty
+    private String artistEnAvant;
     private Set<UUID> artists;
 }

@@ -104,15 +104,15 @@ public class FestixApiApplication {
             artistRepository.save(artist5);
 
             Set<Artist> artists = new HashSet<>(Arrays.asList(artist1, artist2, artist3));
-            Event event = new Event(null, "Premier Event", LocalDateTime.now(), festival, artists);
-            Event event6 = new Event(null, "Deuxième Event", LocalDateTime.now().plusHours(1), festival, artists);
-            Event event7 = new Event(null, "Troisième Event", LocalDateTime.now().plusHours(2), festival, artists);
+            Event event = new Event(null, "Premier Event", LocalDateTime.now(), festival, artists, artist1.getArtistName());
+            Event event6 = new Event(null, "Deuxième Event", LocalDateTime.now().plusHours(1), festival, artists, artist2.getArtistName());
+            Event event7 = new Event(null, "Troisième Event", LocalDateTime.now().plusHours(2), festival, artists, artist3.getArtistName());
             Set<Artist> artists2 = new HashSet<>(Arrays.asList(artist2, artist3));
-            Event event2 = new Event(null, "Premier Event", LocalDateTime.now(), festival2, artists2);
+            Event event2 = new Event(null, "Premier Event", LocalDateTime.now(), festival2, artists2, artist3.getArtistName());
             Set<Artist> artists3 = new HashSet<>(Arrays.asList(artist3, artist4));
-            Event event3 = new Event(null, "Premier Event", LocalDateTime.now(), festival3, artists3);
+            Event event3 = new Event(null, "Premier Event", LocalDateTime.now(), festival3, artists3,artist4.getArtistName());
             Set<Artist> artists4 = new HashSet<>(Arrays.asList(artist4, artist5));
-            Event event4 = new Event(null, "Premier Event", LocalDateTime.now(), festival4, artists4);
+            Event event4 = new Event(null, "Premier Event", LocalDateTime.now(), festival4, artists4, artist5.getArtistName());
             eventRepository.save(event);
             eventRepository.save(event2);
             eventRepository.save(event3);
