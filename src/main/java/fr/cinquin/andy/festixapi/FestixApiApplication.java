@@ -35,9 +35,9 @@ public class FestixApiApplication {
             authorityRepository.save(user);
 
             Users andy = new Users(null, "andy", "Andy", "Cinquin", passwordEncoder.encode("password"), "cinquin.andy@gmail.com", true, List.of(admin));
-            Users test = new Users(null, "test", "test", "test", passwordEncoder.encode("test"), "test.test@test.com", true, List.of(admin));
-            Users andy2 = new Users(null, "andy2", "Andy2", "Cinquin2", passwordEncoder.encode("password2"), "cinquin.andy2@gmail.com", true, List.of(admin));
-            Users andy3 = new Users(null, "andy3", "Andy3", "Cinquin3", passwordEncoder.encode("password3"), "cinquin.andy3@gmail.com", true, List.of(user));
+            Users test = new Users(null, "test", "test", "test", passwordEncoder.encode("password"), "test.test@test.com", true, List.of(admin));
+            Users andy2 = new Users(null, "andy2", "Andy2", "Cinquin2", passwordEncoder.encode("password"), "cinquin.andy2@gmail.com", true, null);
+            Users andy3 = new Users(null, "andy3", "Andy3", "Cinquin3", passwordEncoder.encode("password"), "cinquin.andy3@gmail.com", true, List.of(user));
 
             userRepository.save(andy);
             userRepository.save(test);

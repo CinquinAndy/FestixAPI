@@ -9,6 +9,8 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
     @Mapping(target = "roles", ignore = true)
     UserDto map(Users users);
+    @Mapping(target = "authorities_users", ignore = true)
+    @Mapping(target = "authorities", ignore = true)
     @Mapping(target = "roles", ignore = true)
     Users map(UserDto userDto);
 }

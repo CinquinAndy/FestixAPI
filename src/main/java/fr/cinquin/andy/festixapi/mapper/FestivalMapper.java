@@ -12,6 +12,6 @@ import org.mapstruct.Mapping;
 public interface FestivalMapper {
     @Mapping(target = "events", ignore = true)
     FestivalDto map(Festival festival);
-    @Mapping(target = "events", ignore = true)
+
     Festival map(FestivalDto festivalDto);
 }

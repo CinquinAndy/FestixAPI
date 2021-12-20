@@ -58,6 +58,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .csrf()
+                .ignoringAntMatchers("/auth/register/")
                 .ignoringAntMatchers("/login")
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()

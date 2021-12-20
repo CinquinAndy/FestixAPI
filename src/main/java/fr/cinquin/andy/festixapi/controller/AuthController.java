@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static java.time.LocalDateTime.now;
 
@@ -23,7 +25,10 @@ public class AuthController {
     private final AuthServiceImpl authService;
 
     @PostMapping("/register/")
-    public ResponseEntity<Response> saveAdmin(@RequestBody @Valid UserDto userDto){
+    public ResponseEntity<Response> saveAdmin(@RequestBody UserDto userDto){
+        if(userDto.getRoles() == null || userDto.getRoles().isEmpty()){
+            userDto.setRoles(Set.of("USER"));
+        }
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
