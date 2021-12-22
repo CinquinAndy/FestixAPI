@@ -47,7 +47,8 @@ public class AuthServiceImpl implements AuthService {
             return null;
         } else {
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-            user.setEnabled(false);
+            //FIXME : disable later
+            user.setEnabled(true);
             adminRepository.save(user);
             return user;
         }
