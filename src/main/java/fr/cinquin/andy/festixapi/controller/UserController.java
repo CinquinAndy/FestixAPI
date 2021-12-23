@@ -2,7 +2,6 @@ package fr.cinquin.andy.festixapi.controller;
 
 import fr.cinquin.andy.festixapi.dto.UserDto;
 import fr.cinquin.andy.festixapi.model.UserToReturn;
-import fr.cinquin.andy.festixapi.model.Users;
 import fr.cinquin.andy.festixapi.model.Response;
 import fr.cinquin.andy.festixapi.service.implementation.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -54,6 +53,33 @@ public class UserController {
                         .timeStamp(now())
                         .data(Map.of("user", result))
                         .message("User retrieved")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .build()
+        );
+    }
+
+    @PatchMapping("/changestate/{uuid}/")
+    public ResponseEntity<Response> enable(@PathVariable("uuid") String uuid) {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("user", userService.changestate(uuid)))
+                        .message("user saved")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .build()
+        );
+    }
+
+    @PatchMapping("/update/{uuid}/")
+    public ResponseEntity<Response> saveUser(@RequestBody @Valid UserDto userDto, @PathVariable("uuid") String uuid) {
+        userDto.setId(UUID.fromString(uuid));
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("artist", userService.update(userDto)))
+                        .message("user saved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
                         .build()
