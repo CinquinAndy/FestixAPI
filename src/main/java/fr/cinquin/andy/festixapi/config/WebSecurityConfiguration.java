@@ -66,7 +66,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/artist/create/","/artist/delete/*/","/artist/update/*/").authenticated()
                 .antMatchers("/event/create/","/event/delete/*/","/event/update/*/").authenticated()
                 .antMatchers("/festival/create/","/festival/delete/*/","/festival/update/*/").authenticated()
-                .antMatchers("/user/delete/*/","/user/update/*/").authenticated()
+                .antMatchers("/user/delete/*/","/user/update/*/", "user/changestate/*/").authenticated()
                 .antMatchers("/**").permitAll()
                 .and()
                 .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
