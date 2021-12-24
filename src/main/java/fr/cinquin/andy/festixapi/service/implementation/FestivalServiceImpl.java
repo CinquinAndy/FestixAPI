@@ -34,7 +34,6 @@ public class FestivalServiceImpl implements FestivalService {
 
     @Override
     public Collection<Festival> list(int limit) {
-        log.info("List festival... limit : {}", limit);
         return festivalRepository.findAll(PageRequest.of(0, limit, Sort.by(Sort.Direction.ASC, "dateStart"))).toList();
     }
 
@@ -46,7 +45,6 @@ public class FestivalServiceImpl implements FestivalService {
 
     @Override
     public Festival get(String uuid) {
-        log.info("get Festival... {}", uuid);
         return festivalRepository.existsById(UUID.fromString(uuid)) ? festivalRepository.getById(UUID.fromString(uuid)) : null;
     }
 
@@ -59,7 +57,6 @@ public class FestivalServiceImpl implements FestivalService {
 
     @Override
     public Boolean delete(String uuid) {
-        log.info("delete Festival... {}", uuid);
         Boolean exists = festivalRepository.existsById(UUID.fromString(uuid)) ? Boolean.TRUE : Boolean.FALSE;
         if(exists == Boolean.TRUE) {
             festivalRepository.delete(festivalRepository.getById(UUID.fromString(uuid)));

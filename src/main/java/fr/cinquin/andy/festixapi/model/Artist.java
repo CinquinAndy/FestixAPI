@@ -29,7 +29,7 @@ public class Artist {
     private String musicStyle;
     @Column(name = "PHOTO_URL", nullable = false, length = 2048)
     private String photoUrl;
-    @ManyToMany(mappedBy = "artists", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "artists", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonManagedReference
     @ToString.Exclude
     private Set<Event> events;

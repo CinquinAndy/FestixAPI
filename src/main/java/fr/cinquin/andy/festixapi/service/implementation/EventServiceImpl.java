@@ -32,13 +32,11 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Collection<Event> list(int limit) {
-        log.info("List event... limit : {}", limit);
         return eventRepository.findAll(PageRequest.of(0, limit)).toList();
     }
 
     @Override
     public Event get(String uuid) {
-        log.info("get Event... {}", uuid);
         return eventRepository.existsById(UUID.fromString(uuid)) ? eventRepository.getById(UUID.fromString(uuid)) : null;
     }
 
@@ -55,7 +53,6 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Boolean delete(String uuid) {
-        log.info("delete Event... {}", uuid);
         Boolean exists = eventRepository.existsById(UUID.fromString(uuid)) ? Boolean.TRUE : Boolean.FALSE;
         if(exists == Boolean.TRUE) {
             eventRepository.delete(eventRepository.getById(UUID.fromString(uuid)));

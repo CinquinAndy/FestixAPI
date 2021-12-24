@@ -69,7 +69,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean delete(String uuid) {
-        log.info("delete User... {}", uuid);
         Boolean exists = adminRepository.existsById(UUID.fromString(uuid)) ? Boolean.TRUE : Boolean.FALSE;
         if(exists == Boolean.TRUE) {
             adminRepository.delete(adminRepository.getById(UUID.fromString(uuid)));

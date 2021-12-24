@@ -29,13 +29,11 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     public Artist create(ArtistDto artistDto) {
         Artist artist = mapper.map(artistDto);
-        log.info("Create artist... {}", artist.getArtistName());
         return artistRepository.save(artist);
     }
 
     @Override
     public Collection<Artist> list(int limit) {
-        log.info("List artist... limit : {}", limit);
         return artistRepository.findAll(PageRequest.of(0, limit)).toList();
     }
 
@@ -50,20 +48,17 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     public Artist get(String uuid) {
-        log.info("get Artist... {}", uuid);
         return artistRepository.existsById(UUID.fromString(uuid)) ? artistRepository.getById(UUID.fromString(uuid)) : null;
     }
 
     @Override
     public Artist update(ArtistDto artistDto) {
         Artist artist = mapper.map(artistDto);
-        log.info("Update artist... {}", artist.getArtistName());
         return artistRepository.save(artist);
     }
 
     @Override
     public Boolean delete(String uuid) {
-        log.info("delete Artist... {}", uuid);
         Boolean exists = artistRepository.existsById(UUID.fromString(uuid)) ? Boolean.TRUE : Boolean.FALSE;
         if(exists == Boolean.TRUE) {
             artistRepository.delete(artistRepository.getById(UUID.fromString(uuid)));
