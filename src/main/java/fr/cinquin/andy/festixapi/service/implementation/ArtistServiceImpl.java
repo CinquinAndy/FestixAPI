@@ -38,6 +38,11 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
+    public Collection<Artist> byevent(String uuid) {
+        return artistRepository.findAllByEvents(UUID.fromString(uuid));
+    }
+
+    @Override
     public Artist random() {
         Random rand = new Random(); //instance of random class
         List<Artist> artistList = artistRepository.findAll(PageRequest.of(0, 100)).toList();

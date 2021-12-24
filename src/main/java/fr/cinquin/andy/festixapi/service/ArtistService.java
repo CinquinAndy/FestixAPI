@@ -12,6 +12,7 @@ import java.util.Collection;
 public interface ArtistService {
     Artist create(ArtistDto artistDto);
     Collection<Artist> list(int limit);
+    Collection<Artist> byevent(String uuid);
     Artist random();
     Artist get(String uuid);
     Artist update(ArtistDto artistDto);

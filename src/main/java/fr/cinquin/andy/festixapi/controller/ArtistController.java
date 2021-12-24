@@ -49,6 +49,19 @@ public class ArtistController {
         );
     }
 
+    @GetMapping("/list/byevent/{idEvent}")
+    public ResponseEntity<Response> getArtistsByEvent(@PathVariable("idEvent") String uuid) {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("artists", artistService.byevent(uuid)))
+                        .message("Events retrieved")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .build()
+        );
+    }
+
     @GetMapping("/get/{uuid}/")
     public ResponseEntity<Response> getArtist(@PathVariable("uuid") String uuid) {
         Artist result = artistService.get(uuid);
