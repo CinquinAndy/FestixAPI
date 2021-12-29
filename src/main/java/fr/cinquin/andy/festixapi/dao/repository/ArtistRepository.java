@@ -1,7 +1,6 @@
 package fr.cinquin.andy.festixapi.dao.repository;
 
 import fr.cinquin.andy.festixapi.model.Artist;
-import fr.cinquin.andy.festixapi.model.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

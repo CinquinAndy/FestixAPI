@@ -2,7 +2,6 @@ package fr.cinquin.andy.festixapi.dao.repository;
 
 import fr.cinquin.andy.festixapi.model.UserToReturn;
 import fr.cinquin.andy.festixapi.model.Users;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

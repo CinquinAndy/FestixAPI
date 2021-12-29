@@ -1,7 +1,6 @@
 package fr.cinquin.andy.festixapi.dto;
 
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

@@ -36,7 +36,7 @@ public class FestivalController {
 
     @GetMapping("/list/limit/{number}")
     public ResponseEntity<Response> getFestivalsLimited(@PathVariable("number") String number) {
-        Integer num;
+        int num;
         try {
             num = Integer.parseInt(number);
         } catch(NumberFormatException e) {
