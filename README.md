@@ -32,6 +32,7 @@ Changez alors en conséquence la ligne 'adress' et choisissez le port qui vous c
 
 
 # Rendu du projet : 
+![](Rendu/IMG_20211229_181909.jpg)
 ## Explication - Rendu WORD
 <a href="Rendu/Rendu.pdf">Rendu pdf</a>
 ## Visiteur
