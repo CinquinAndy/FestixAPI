@@ -1,6 +1,7 @@
 package fr.cinquin.andy.festixapi.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -30,10 +31,12 @@ public class Event {
     @JoinColumn(name = "FESTIVAL_ID",referencedColumnName = "ID")
     @JsonBackReference
     private Festival festival;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "EVENT_ARTIST", joinColumns = @JoinColumn(name = "EVENT_ID"), inverseJoinColumns = @JoinColumn(name = "ARTIST_ID"))
-    @JsonBackReference
-    @ToString.Exclude
+//    @JsonBackReference
+    @JsonManagedReference
+
+//    @ToString.Exclude
     private Set<Artist> artists;
     @Column(name = "ARTISTENAVANT")
     private String artistEnAvant;

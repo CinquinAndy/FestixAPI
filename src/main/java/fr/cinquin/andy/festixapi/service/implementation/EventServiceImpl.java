@@ -1,9 +1,11 @@
 package fr.cinquin.andy.festixapi.service.implementation;
 
 import fr.cinquin.andy.festixapi.dao.repository.EventRepository;
+import fr.cinquin.andy.festixapi.dao.repository.FestivalRepository;
 import fr.cinquin.andy.festixapi.dto.EventDto;
 import fr.cinquin.andy.festixapi.mapper.EventMapper;
 import fr.cinquin.andy.festixapi.model.Event;
+import fr.cinquin.andy.festixapi.model.Festival;
 import fr.cinquin.andy.festixapi.service.EventService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,12 +23,14 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
-
+    private final FestivalRepository festivalRepository;
     private final EventMapper mapper = Mappers.getMapper(EventMapper.class);
 
     @Override
     public Event create(EventDto eventDto) {
         Event event = mapper.map(eventDto);
+        Festival festival = festivalRepository.getById(UUID.fromString(eventDto.getFestival()));
+        event.setFestival(festival);
         return eventRepository.save(event);
     }
 
@@ -48,6 +52,8 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event update(EventDto eventDto) {
         Event event = mapper.map(eventDto);
+        Festival festival = festivalRepository.getById(UUID.fromString(eventDto.getFestival()));
+        event.setFestival(festival);
         return eventRepository.save(event);
     }
 

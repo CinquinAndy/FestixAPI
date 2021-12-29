@@ -1,5 +1,6 @@
 package fr.cinquin.andy.festixapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -29,8 +30,9 @@ public class Artist {
     private String musicStyle;
     @Column(name = "PHOTO_URL", nullable = false, length = 2048)
     private String photoUrl;
-    @ManyToMany(mappedBy = "artists", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JsonManagedReference
-    @ToString.Exclude
+    @ManyToMany(mappedBy = "artists", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+//    @JsonManagedReference
+    @JsonBackReference
+//    @ToString.Exclude
     private Set<Event> events;
 }
