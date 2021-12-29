@@ -1,6 +1,6 @@
 package fr.cinquin.andy.festixapi;
 
-import fr.cinquin.andy.festixapi.dao.repository.*;
+import fr.cinquin.andy.festixapi.dao.*;
 import fr.cinquin.andy.festixapi.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

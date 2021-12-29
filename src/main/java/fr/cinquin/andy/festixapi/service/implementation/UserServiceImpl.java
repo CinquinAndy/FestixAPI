@@ -4,7 +4,7 @@ import fr.cinquin.andy.festixapi.dto.UserDto;
 import fr.cinquin.andy.festixapi.mapper.UserMapper;
 import fr.cinquin.andy.festixapi.model.UserToReturn;
 import fr.cinquin.andy.festixapi.model.Users;
-import fr.cinquin.andy.festixapi.dao.repository.UserRepository;
+import fr.cinquin.andy.festixapi.dao.UserRepository;
 import fr.cinquin.andy.festixapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

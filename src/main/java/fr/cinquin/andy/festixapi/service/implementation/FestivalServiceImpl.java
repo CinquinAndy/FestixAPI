@@ -1,6 +1,6 @@
 package fr.cinquin.andy.festixapi.service.implementation;
 
-import fr.cinquin.andy.festixapi.dao.repository.FestivalRepository;
+import fr.cinquin.andy.festixapi.dao.FestivalRepository;
 import fr.cinquin.andy.festixapi.dto.FestivalDto;
 import fr.cinquin.andy.festixapi.mapper.FestivalMapper;
 import fr.cinquin.andy.festixapi.model.Festival;

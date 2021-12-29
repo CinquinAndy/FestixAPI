@@ -1,7 +1,7 @@
 package fr.cinquin.andy.festixapi.service.implementation;
 
-import fr.cinquin.andy.festixapi.dao.repository.AuthorityRepository;
-import fr.cinquin.andy.festixapi.dao.repository.UserRepository;
+import fr.cinquin.andy.festixapi.dao.AuthorityRepository;
+import fr.cinquin.andy.festixapi.dao.UserRepository;
 import fr.cinquin.andy.festixapi.dto.UserDto;
 import fr.cinquin.andy.festixapi.mapper.UserMapper;
 import fr.cinquin.andy.festixapi.model.Authority;

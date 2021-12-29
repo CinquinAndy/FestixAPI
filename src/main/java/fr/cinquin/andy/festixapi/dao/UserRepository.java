@@ -1,4 +1,4 @@
-package fr.cinquin.andy.festixapi.dao.repository;
+package fr.cinquin.andy.festixapi.dao;
 
 import fr.cinquin.andy.festixapi.model.UserToReturn;
 import fr.cinquin.andy.festixapi.model.Users;
